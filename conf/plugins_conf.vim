@@ -2,14 +2,12 @@ set nocompatible
 filetype off
 
 """""""""""""""""""""""""""""""""
-" Load Vundle.vim
+" Load plug.vim
 """""""""""""""""""""""""""""""""
 let s:install_dir = expand('<sfile>:p:h')."/.."
-call vundle#begin(s:install_dir . '/plugins')
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'altercation/vim-colors-solarized'
-call vundle#end()
-filetype plugin indent on
+call plug#begin(s:install_dir . '/plugins')
+Plug 'altercation/vim-colors-solarized'
+call plug#end()
 
 """""""""""""""""""""""""""""""""
 " Config vim-colors-solarized
