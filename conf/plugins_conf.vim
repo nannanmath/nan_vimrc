@@ -1,16 +1,17 @@
 """"""""""""""""""""""""""""""""
 " Config vim-colors-solarized
 """"""""""""""""""""""""""""""""
-syntax enable
-set background=dark
-colorscheme solarized
+"syntax enable
+"set background=dark
+"colorscheme solarized
 
 """""""""""""""""""""""""""""""""
-" Config lightline
+" Config molokai & lightline
 """""""""""""""""""""""""""""""""
 set laststatus=2
 if !has('gui_running')
     set t_Co=256
+    colorscheme molokai
 endif
 set noshowmode
 
@@ -68,7 +69,7 @@ let g:ctrlp_mruf_max=15
 let g:ctrlp_follow_symlinks=1
 
 " Search method.
-let g:ctrlp_vy_filename=1
+let g:ctrlp_by_filename=1
 let g:ctrlp_regexp=0
 
 """""""""""""""""""""""""""""""""
@@ -90,4 +91,34 @@ let g:ackhighlight=1
 
 " Empty search.
 let g:ack_use_cword_for_empty_search=1
+
+"""""""""""""""""""""""""""""""""
+" Config syntastic
+"""""""""""""""""""""""""""""""""
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_python_chechers=['pylint']
+
+"""""""""""""""""""""""""""""""""
+" Config UltiSnips
+"""""""""""""""""""""""""""""""""
+let g:UltiSnipsExpandTrigger="<leader><tab>"
+let g:UltiSnipsJumpForwardTrigger="<leader><tab>"
+let g:UltiSnipsJumpBackwardTrigger="<leader><C-z>"
+let g:UltiSnipsEditSplit="vertical"
+let g:UntiSnipsListSnippets="<C-e>"
+
+""""""""""""""""""""""""""""""
+"  Config vim-expand-region  "
+""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""
+"  Config vim-fugitive  "
+"""""""""""""""""""""""""
 

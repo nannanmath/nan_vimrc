@@ -17,6 +17,12 @@ Plugin 'bufexplorer.zip'
 Plugin 'mru.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'mileszs/ack.vim'
+Plugin 'vim-syntastic/syntastic'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'terryma/vim-expand-region'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tomasr/molokai'
 
 call vundle#end()
 
