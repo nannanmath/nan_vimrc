@@ -5,15 +5,31 @@ set history=500
 filetype plugin on
 filetype indent on
 
-" Auto read when a file is changed from the outside.
+" Auto write & read when a file is changed from the outside.
+set autowrite
 set autoread
 
 " Set <leader>.
 let mapleader=","
 let g:mapleader=","
 
+" Deal with unsaved file.
+set confirm
+
+" Turn backup off.
+set nobackup
+set nowb
+set noswapfile
+
+" Hidden startup message.
+set shortmess=atI
+
 " Save file for handling the permission-denied error.
 command W w !sudo tee % > /dev/null
+
+" Show line number $ position.
+set nu
+set ruler
 
 " Moving with 7 lines.
 set so=7
@@ -22,17 +38,16 @@ set so=7
 set encoding=utf8
 set ffs=unix,dos,mac
 set ff=unix
-
-" Turn backup off.
-set nobackup
-set nowb
-set noswapfile
+let $LANG='en'
 
 " Tab 
 set expandtab
-set smarttab
-set shiftwidth=4
 set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set smarttab
+" Tab length on some file types.
+autocmd FileType c setloack shiftwidth=2 tabstop=2 softtabstop=2
 
 " Linebreak
 set lbr
@@ -43,17 +58,10 @@ set ai
 set si
 set wrap
 
-
-
-let $LANG='en'
-
 " Wildmenu
 set wildmenu
 set wildignore=*.o,*~,*.pyc
 set wildignore+=*/.git/*
-
-" Show current position.
-set ruler
 
 " Height of command bar.
 set cmdheight=2
@@ -79,24 +87,23 @@ set lazyredraw
 " Regular expression.
 set magic
 
-" Matching brackets.
-set showmatch
-set mat=2
-
 " No sound on errors.
 set noerrorbells
 set novisualbell
-set t_vb=
-set tm=500
-
+set t_vb= 
+set tm=500 
 " Add a bit extra margin to the left.
 set foldcolumn=1
 
 " Enable syntax hignlighting.
 syntax enable
 
-" Moving between windows.
+" Navigate windows.
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-h> <C-w>h
 noremap <C-l> <C-w>l
+inoremap <C-j> <C-w>j
+inoremap <C-k> <C-w>k
+inoremap <C-h> <C-w>h
+inoremap <C-l> <C-w>l
