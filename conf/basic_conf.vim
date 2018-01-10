@@ -30,6 +30,12 @@ command W w !sudo tee % > /dev/null
 " Show line number $ position.
 set nu
 set ruler
+" Highlight current column and line.
+set cursorcolumn
+set cursorline
+
+" Turn mouse off.
+set mouse-=a
 
 " Moving with 7 lines.
 set so=7

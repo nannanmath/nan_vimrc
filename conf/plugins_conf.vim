@@ -12,7 +12,8 @@ set noshowmode
 " Config nerdtree
 """""""""""""""""""""""""""""""""
 noremap <F3> :NERDTreeToggle<CR>
-noremap <leader>f :NERDTreeFind<CR>
+inoremap <F3> : MERDTreeToggle<CR>
+noremap <leader>qf :NERDTreeFind<CR>
 let g:NERDTreeWinPos="right"
 let NERDTreeShowHidden=0
 let NERDTreeIgnore=['\.pyc$', '\.pyo$', '__pycache__']
@@ -27,29 +28,31 @@ let g:bufExplorerDefaultHelp=0
 let g:bufExplorerShowRelativePath=1
 let g:bufExplorerFindActive=1
 let g:bufExplorerSortBy='name'
-noremap <C-x>b :BufExplorer<CR>
+noremap <leader>b :BufExplorer<CR>
+inoremap <leader>b : BufExplorer<CR>
 
 """""""""""""""""""""""""""""""""
 " Config mru.vim
 """""""""""""""""""""""""""""""""
 let MRU_Max_Entries=400
-noremap <C-x>f :MRU<CR>
+noremap <leader>m :MRU<CR>
+inoremap <leader>m :MRU<CR>
 
 """""""""""""""""""""""""""""""""
 " Config ctrlp
 """""""""""""""""""""""""""""""""
-let g:ctrlp_map='<C-p>f' " Search files in current dir.
+let g:ctrlp_map='<leader>f' " Search files in current dir.
 let g:ctrlp_cmd='CtrlP'
-"window Search files in MRU.
-nnoremap <C-x>m :CtrlPMRU<CR>
+" Search files in MRU.
+nnoremap <leader>sm :CtrlPMRU<CR>
 " List files in Buffer.
-nnoremap <C-x>b :CtrlPBuffer<CR>
+nnoremap <leader>sb :CtrlPBuffer<CR>
 " Show hidden files.
 let g:ctrlp_show_hidden=1
 " Ignore files.
 let g:ctrlp_custom_ignore={
-    \ 'dir': '\v[\/].(git|hg|svn)$',
-    \ 'file': '\v\.(pyc|pyo|exe|so|dll)$',
+    \ 'dir': '\v[\/].(git)$',
+    \ 'file': '\v\.(pyc|pyo|so|a)$',
     \ }
 " Search path.
 let g:ctrlp_working_path_mode='ra'
@@ -69,7 +72,8 @@ let g:ctrlp_regexp=0
 """""""""""""""""""""""""""""""""
 " Config ack
 """""""""""""""""""""""""""""""""
-noremap <leader>c :Ack!<space>
+noremap <leader>a :Ack!<space>
+inoremap <leader>a :Ack!<space>
 
 " Search by ag.
 if executable('ag')
@@ -120,6 +124,8 @@ let g:UntiSnipsListSnippets="<C-e>"
 "  Config vim-fugitive  "
 """""""""""""""""""""""""
 
+
+
 """""""""""""""""""
 "  Config tagbar  "
 """""""""""""""""""
@@ -137,8 +143,8 @@ noremap <F2> :TaskList<CR>
 """""""""""""""""""
 "  Config tabman  "
 """""""""""""""""""
-let g:tabman_toggle='<leader>mt'
-let g:tabman_focus='<leader>mf'
+let g:tabman_toggle='<leader>k'
+let g:tabman_focus='<leader>l'
 let g:tabman_width=25
 let g:tabman_side='left'
 let g:tabman_specials=0
@@ -157,5 +163,7 @@ let g:vim_markdown_frontmatter=1
 """""""""""""""""""""""
 "  Config ConqueTerm  "
 """""""""""""""""""""""
-nnoremap <leader>b :ConqueTermSplit bash<CR>
-nnoremap <leader>vb :ConqueTermVSplit bash<CR>
+nnoremap <leader>w :ConqueTermSplit bash<CR>
+inoremap <leader>w :ConqueTermSplit bash<CR>
+nnoremap <leader>vw :ConqueTermVSplit bash<CR>
+inoremap <leader>vw :ConqueTermVSplit bash<CR>
