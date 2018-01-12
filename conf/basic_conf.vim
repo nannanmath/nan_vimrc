@@ -25,7 +25,7 @@ set noswapfile
 set shortmess=atI
 
 " Save file for handling the permission-denied error.
-command W w !sudo tee % > /dev/null
+"command W w !sudo tee % > /dev/null
 
 " Show line number $ position.
 set nu
@@ -53,7 +53,7 @@ set softtabstop=4
 set shiftwidth=4
 set smarttab
 " Tab length on some file types.
-autocmd FileType c setloack shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType c,cpp setloack shiftwidth=2 tabstop=2 softtabstop=2
 
 " Linebreak
 set lbr
@@ -66,8 +66,8 @@ set wrap
 
 " Wildmenu
 set wildmenu
-set wildignore=*.o,*~,*.pyc
-set wildignore+=*/.git/*
+set wildignore=*.o,*.so,*~,*.pyc,*.swp,*.zip,*.png,*.jpg,*.gif
+set wildignore+=*/tmp/*,*/.git/*
 
 " Height of command bar.
 set cmdheight=2
@@ -84,8 +84,15 @@ set ignorecase
 set smartcase
 set hlsearch
 set incsearch
+" Search enable.
+noremap <C-s> /
+inoremap <C-s> <ESC>/
 " Disable highlight.
 noremap <silent> <leader><CR> :noh<CR>
+
+" Save files.
+noremap <C-x><C-s> :update<CR>
+inoremap <C-x><C-s> <C-o>:update<CR>
 
 " Don't redraw while executing macros.
 set lazyredraw
@@ -105,11 +112,12 @@ set foldcolumn=1
 syntax enable
 
 " Navigate windows.
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-h> <C-w>h
-noremap <C-l> <C-w>l
-inoremap <C-j> <C-w>j
-inoremap <C-k> <C-w>k
-inoremap <C-h> <C-w>h
-inoremap <C-l> <C-w>l
+noremap <S-Down> <C-w>j
+noremap <S-Up> <C-w>k
+noremap <S-Left> <C-w>h
+noremap <S-Right> <C-w>l
+inoremap <S-Down> <ESC><C-w>j
+inoremap <S-Up> <ESC><C-w>k
+inoremap <S-Left> <ESC><C-w>h
+inoremap <S-Right> <ESC><C-w>l
+

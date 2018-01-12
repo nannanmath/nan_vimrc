@@ -12,7 +12,7 @@ set noshowmode
 " Config nerdtree
 """""""""""""""""""""""""""""""""
 noremap <F3> :NERDTreeToggle<CR>
-inoremap <F3> : MERDTreeToggle<CR>
+inoremap <F3> <ESC>:NERDTreeToggle<CR>
 noremap <leader>qf :NERDTreeFind<CR>
 let g:NERDTreeWinPos="right"
 let NERDTreeShowHidden=0
@@ -28,27 +28,22 @@ let g:bufExplorerDefaultHelp=0
 let g:bufExplorerShowRelativePath=1
 let g:bufExplorerFindActive=1
 let g:bufExplorerSortBy='name'
-noremap <leader>b :BufExplorer<CR>
-inoremap <leader>b : BufExplorer<CR>
-
+noremap <C-x><C-b> :BufExplorer<CR>
+inoremap <C-x><C-b> <ESC>:BufExplorer<CR>
 """""""""""""""""""""""""""""""""
 " Config mru.vim
 """""""""""""""""""""""""""""""""
 let MRU_Max_Entries=400
-noremap <leader>m :MRU<CR>
-inoremap <leader>m :MRU<CR>
+noremap <C-x><C-m> :MRU<CR>
+inoremap <C-x><C-m> <ESC>:MRU<CR>
 
 """""""""""""""""""""""""""""""""
 " Config ctrlp
 """""""""""""""""""""""""""""""""
-let g:ctrlp_map='<leader>f' " Search files in current dir.
-let g:ctrlp_cmd='CtrlP'
-" Search files in MRU.
-nnoremap <leader>sm :CtrlPMRU<CR>
-" List files in Buffer.
-nnoremap <leader>sb :CtrlPBuffer<CR>
+noremap <C-x><C-f> :CtrlP<CR>
+inoremap <C-x><C-f> <ESC>:CtrlP<CR>
 " Show hidden files.
-let g:ctrlp_show_hidden=1
+let g:ctrlp_show_hidden=0
 " Ignore files.
 let g:ctrlp_custom_ignore={
     \ 'dir': '\v[\/].(git)$',
@@ -58,7 +53,7 @@ let g:ctrlp_custom_ignore={
 let g:ctrlp_working_path_mode='ra'
 " Quickfix window.
 let g:ctrlp_match_window_bottom=1
-let g:ctrlp_max_height=15
+let g:ctrlp_max_height=15 
 let g:ctrlp_match_window_reversed=0
 
 " MRU.
@@ -72,8 +67,8 @@ let g:ctrlp_regexp=0
 """""""""""""""""""""""""""""""""
 " Config ack
 """""""""""""""""""""""""""""""""
-noremap <leader>a :Ack!<space>
-inoremap <leader>a :Ack!<space>
+noremap <C-x><C-a> :Ack!<space>
+inoremap <C-x><C-a> <C-o>:Ack!<space>
 
 " Search by ag.
 if executable('ag')
@@ -151,7 +146,7 @@ let g:tabman_specials=0
 let g:tabman_number=1
 
 """""""""""""""""""""""""
-"  Config vim-markdown  "
+"  Config vim-markdown & vim-instant-markdown  "
 """""""""""""""""""""""""
 " Disabled automatically folding
 let g:vim_markdown_folding_disabled=1
@@ -159,11 +154,13 @@ let g:vim_markdown_folding_disabled=1
 let g:vim_markdown_math=1
 " Highlight YAML frontmatter
 let g:vim_markdown_frontmatter=1
+" vim-instant-markdown will not automatically launch the preview window.
+let g:instant_markdown_autostart=0
+" Server listens to network. Default port is 8090.
+let g:instant_markdown_open_to_the_world=1
 
 """""""""""""""""""""""
 "  Config ConqueTerm  "
 """""""""""""""""""""""
-nnoremap <leader>w :ConqueTermSplit bash<CR>
-inoremap <leader>w :ConqueTermSplit bash<CR>
-nnoremap <leader>vw :ConqueTermVSplit bash<CR>
-inoremap <leader>vw :ConqueTermVSplit bash<CR>
+nnoremap <C-x><C-t> :ConqueTermSplit bash<CR>
+inoremap <C-x><C-t> <ESC>:ConqueTermSplit bash<CR>
