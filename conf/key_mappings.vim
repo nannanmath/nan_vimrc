@@ -1,3 +1,25 @@
+set notimeout
+set ttimeout
+set timeoutlen=50
+
+" Leave Vim.
+inoremap <C-x><C-c> <C-o>:confirm qall<CR>
+" Enable help.
+inoremap <C-h> <C-o>:h
+
+" Command line mappings.
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+cnoremap <M-Up> <Up>
+cnoremap <M-Down> <Down>
+cnoremap <C-d> <Del>
+cnoremap <C-y> <C-r><C-o>"
+cnoremap <M-w> <C-y>
+cnoremap <C-k> d$<C-c><End>
+
+" Error recovery.
+inoremap <C-_> <C-o>u
+inoremap <C-x><C-u> <C-o>u
 "Incremental searching.
 inoremap <C-s> <C-o>:call <SID>StartSearch()<CR><C-o>/
 inoremap <C-r> <C-o>:call <SID>StartSearch()<CR><C-o>?
@@ -17,6 +39,7 @@ vnoremap <M-x> <C-c>:
 for i in range(65,90) + range(97,122)
     execute "set <M-" . nr2char(i) . ">=\<Esc>" . nr2char(i)
 endfor
+execute "set <M-%>=\<Esc>%"
 execute "set <M-<>=\<Esc><"
 "set <M->>=\<Esc>>
 execute "set <Char-190>=\<Esc>>"
@@ -70,12 +93,12 @@ inoremap <silent> <C-x>g <C-o>:call <SID>GotoLine()<CR>
 vnoremap <silent> <C-x>g :<C-u>call <SID>GotoLine()<CR>
 onoremap <silent> <C-x>g :call <SID>GotoLine()<CR>
 " Word & Sentence forward and backward. 
-inoremap <script> <M-Left> <C-o>( 
-vnoremap <script> <M-Left> (
-onoremap <script> <M-Left> (
-inoremap <script> <M-Right> <C-o>) 
-vnoremap <script> <M-Right> )
-onoremap <script> <M-Right> )
+inoremap <M-Left> <C-o>( 
+vnoremap <M-Left> (
+onoremap <M-Left> (
+inoremap <M-Right> <C-o>) 
+vnoremap <M-Right> )
+onoremap <M-Right> )
 inoremap <script> <C-Left> <SID>BackwardWord
 vnoremap <script> <C-Left> <SID>VBackwardWord
 onoremap <script> <C-Left> <SID>OBackwardWord
@@ -89,7 +112,9 @@ onoremap <C-Up> {
 inoremap <C-Down> <C-o>}
 vnoremap <C-Down> }
 onoremap <C-Down> }
-
+" Query & Replace.
+inoremap <M-%> <C-o>:call <SID>QueryReplace()<CR>
+inoremap <C-M-%> <C-o>:call <SID>QueryReplaceRegexp()<CR>
 " Navigate windows.
 noremap <S-Down> <C-w>j
 noremap <S-Up> <C-w>k
@@ -288,3 +313,45 @@ vnoremap <silent> <SID>VBackwardWord <C-c>
     \<C-o>:call <SID>RestoreVirtualedit()<CR>
     \<C-o>gv
     \`` 
+
+" GotoLine.
+function! <SID>GotoLine()
+    let targetline = input("Goto line: ")
+    if targetline =~ "^\\d\\+$"
+        execute "normal! " . targetline . "G0"
+    elseif targetline =~ "^\\d\\+%$"
+        execute "normal! " . targetline . "%"
+    elseif targetline == ""
+        echo "(cancelled)"
+    else
+        echo " <- Not a number"
+    endif
+endfunction
+
+" Query & Replace.
+function! <SID>QueryReplace()
+    let magic_status = &magic
+    set nomagic
+    let searchtext = input("Query replace: ")
+    if searchtext == ""
+        echo "(no text entered): exiting to Insert mode"
+        return
+    endif
+    let replacetext = input("Query replace " . searchtext . " with: ")
+    let searchtext_esc = escape(searchtext,'/\^$')
+    let replacetext_esc = escape(replacetext,'/\')
+    execute ".,$s/" . searchtext_esc . "/" . replacetext_esc . "/cg"
+    let &magic = magic_status
+endfunction
+
+function! <SID>QueryReplaceRegexp()
+    let searchtext = input("Query replace regexp: ")
+    if searchtext == ""
+        echo "(no text entered): exiting to Insert mode"
+        return
+    endif
+    let replacetext = input("Query replace regexp " . searchtext . " with: ")
+    let searchtext_esc = escape(searchtext,'/')
+    let replacetext_esc = escape(replacetext,'/')
+    execute ".,$s/" . searchtext_esc . "/" . replacetext_esc . "/cg"
+endfunction

@@ -83,9 +83,6 @@ set winaltkeys=no
 set backspace=eol,start,indent
 set whichwrap+=b,s,<,>,[,],~,h,l
 
-" Regular expression.
-set magic
-
 " No sound on errors.
 set noerrorbells
 set novisualbell
