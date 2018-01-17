@@ -20,9 +20,6 @@ cnoremap <C-k> d$<C-c><End>
 " Error recovery.
 inoremap <C-_> <C-o>u
 inoremap <C-x><C-u> <C-o>u
-"Incremental searching.
-inoremap <C-s> <C-o>:call <SID>StartSearch()<CR><C-o>/
-inoremap <C-r> <C-o>:call <SID>StartSearch()<CR><C-o>?
 " Disable highlight.
 noremap <silent> <leader><CR> :noh<CR>
 
@@ -82,7 +79,7 @@ onoremap <C-v> <PageDown>
 inoremap <M-v> <PageUp>
 vnoremap <M-v> <PageUp>
 onoremap <M-v> <PageUp>
-"
+
 inoremap <C-x>= <C-g>
 vnoremap <C-x>= <C-g>
 onoremap <C-x>= <C-g>
@@ -112,6 +109,12 @@ onoremap <C-Up> {
 inoremap <C-Down> <C-o>}
 vnoremap <C-Down> }
 onoremap <C-Down> }
+
+"Incremental 
+"
+"searching.
+inoremap <C-s> <C-o>:call <SID>StartSearch()<CR><C-o>/
+inoremap <C-r> <C-o>:call <SID>StartSearch()<CR><C-o>?
 " Query & Replace.
 inoremap <M-%> <C-o>:call <SID>QueryReplace()<CR>
 inoremap <C-M-%> <C-o>:call <SID>QueryReplaceRegexp()<CR>
@@ -130,10 +133,7 @@ inoremap <S-Right> <ESC><C-w>l
 """""""""""""""""""""
 "Mark a cursor position and restore it afterward.
 function! <SID>Mark()
-    let mark = line(".") . "G" . virtcol(".") . "|"
-    normal! H
-    let mark = "normal!" . line(".") . "Gzt" . mark
-    execute mark
+    let mark = "normal!" . line(".") . "G" . virtcol(".") . "|"
     return mark
 endfunction
 
@@ -143,13 +143,14 @@ function! <SID>StartSearch()
     let s:ignorecase_status = &ignorecase
     let s:smartcase_status = &smartcase
     let s:lazyredraw_status = &lazyredraw
-    set nowrapscan
+    let s:hls_status = &hls
     set incsearch
     set lazyredraw
     set ignorecase
     set smartcase
-    cnoremap <C-s> <C-c><C-o>:call <SID>SearchAgain()<CR><C-o>/<Up>
-    cnoremap <C-r> <C-c><C-o>:call <SID>SearchAgain()<CR><C-o>?<Up>
+    set hls
+    cnoremap <C-s> <C-c><C-o>:call <SID>SearchAgain('/')<CR><C-o>/<Up>
+    cnoremap <C-r> <C-c><C-o>:call <SID>SearchAgain('?')<CR><C-o>?<Up>
     cnoremap <silent> <CR> <CR><C-o>:call <SID>StopSearch()<CR>
     cnoremap <silent> <C-g> <C-c><C-o>:call <SID>AbortSearch()<CR>
     cnoremap <silent> <ESC> <C-c><C-o>:call <SID>AbortSearch()<CR>
@@ -157,21 +158,20 @@ function! <SID>StartSearch()
 endfunction
 
 " Search again.
-function! <SID>SearchAgain()
-   let current_pos = <SID>Mark()
-    if search(@/, 'W') == 0
-        set wrapscan
+function! <SID>SearchAgain(search_dir)
+    let s:wrapscan_status = &wrapscan
+    set wrapscan
+    let current_pos = <SID>Mark()
+    echom current_pos
+    if a:search_dir == '/'
+        execute search(@/)
     else
-        execute current_pos
+        execute search(@/,'b')
     endif
+    execute current_pos
 
-    cnoremap <C-s> <CR><C-o>:call <SID>SearchAgain()<CR><C-o>/<Up>
-    cnoremap <C-r> <CR><C-o>:call <SID>SearchAgain()<CR><C-o>?<Up>
-
-    if !exists("s:hls_status")
-        let s:hls_status = &hls
-    endif
-    set hls
+    cnoremap <C-s> <CR><C-o>:call <SID>SearchAgain('/')<CR><C-o>/<Up>
+    cnoremap <C-r> <CR><C-o>:call <SID>SearchAgain('?')<CR><C-o>?<Up>
 endfunction
 
 " Stop search.
@@ -181,6 +181,11 @@ function! <SID>StopSearch()
     cunmap <CR>
     cunmap <C-g>
     cnoremap <C-g> <C-c>
+    " Restore wrapscan.
+    if exists("s:wrapscan_status")
+        let &wrapscan = s:wrapscan_status
+        unlet s:wrapscan_status
+    endif
     " Restore incsearch.
     if exists("s:incsearch_status")
         let &incsearch = s:incsearch_status
@@ -198,7 +203,7 @@ function! <SID>StopSearch()
     endif
     " Restore lazyredraw.
     if exists("s:lazyredraw_status")
-        let &lazyredraw = s:incsearch_status
+        let &lazyredraw = s:lazyredraw_status
         unlet s:lazyredraw_status
     endif
     " Restore hls.
