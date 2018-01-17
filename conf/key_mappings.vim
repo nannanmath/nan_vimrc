@@ -114,7 +114,7 @@ onoremap <C-Down> }
 "
 "searching.
 inoremap <C-s> <C-o>:call <SID>StartSearch()<CR><C-o>/
-inoremap <C-r> <C-o>:call <SID>StartSearch()<CR><C-o>?
+inoremap <M-s> <C-o>:call <SID>StartSearch()<CR><C-o>?
 " Query & Replace.
 inoremap <M-%> <C-o>:call <SID>QueryReplace()<CR>
 inoremap <C-M-%> <C-o>:call <SID>QueryReplaceRegexp()<CR>
@@ -149,35 +149,17 @@ function! <SID>StartSearch()
     set ignorecase
     set smartcase
     set hls
-    cnoremap <C-s> <C-c><C-o>:call <SID>SearchAgain('/')<CR><C-o>/<Up>
-    cnoremap <C-r> <C-c><C-o>:call <SID>SearchAgain('?')<CR><C-o>?<Up>
+    cnoremap <C-s> <CR><C-o>/<Up>
+    cnoremap <M-s> <CR><C-o>?<Up>
     cnoremap <silent> <CR> <CR><C-o>:call <SID>StopSearch()<CR>
     cnoremap <silent> <C-g> <C-c><C-o>:call <SID>AbortSearch()<CR>
-    cnoremap <silent> <ESC> <C-c><C-o>:call <SID>AbortSearch()<CR>
     let s:before_search_mark = <SID>Mark()
-endfunction
-
-" Search again.
-function! <SID>SearchAgain(search_dir)
-    let s:wrapscan_status = &wrapscan
-    set wrapscan
-    let current_pos = <SID>Mark()
-    echom current_pos
-    if a:search_dir == '/'
-        execute search(@/)
-    else
-        execute search(@/,'b')
-    endif
-    execute current_pos
-
-    cnoremap <C-s> <CR><C-o>:call <SID>SearchAgain('/')<CR><C-o>/<Up>
-    cnoremap <C-r> <CR><C-o>:call <SID>SearchAgain('?')<CR><C-o>?<Up>
 endfunction
 
 " Stop search.
 function! <SID>StopSearch()
     cunmap <C-s>
-    cunmap <C-r>
+    cunmap <M-s>
     cunmap <CR>
     cunmap <C-g>
     cnoremap <C-g> <C-c>
