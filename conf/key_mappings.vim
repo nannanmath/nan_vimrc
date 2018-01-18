@@ -62,9 +62,12 @@ imap <C-e> <End>
 vmap <C-e> <End>
 omap <C-e> <End>
 " Delete character under cursor. 
-inoremap <C-d> <Del>
-vnoremap <C-d> <Del>
-onoremap <C-d> <Del>
+inoremap <C-d> <C-o>d$<C-o>$
+vnoremap <C-d> d$
+onoremap <C-d> d$
+inoremap <C-k> <C-o>dd<C-o>0
+vnoremap <C-k> dd
+onoremap <C-k> dd
 " Go to the first and last character of buffer.
 inoremap <M-<> <C-o>1G<C-o>0
 vnoremap <M-<> 1G0
@@ -80,22 +83,10 @@ inoremap <M-v> <PageUp>
 vnoremap <M-v> <PageUp>
 onoremap <M-v> <PageUp>
 
-inoremap <C-x>= <C-g>
-vnoremap <C-x>= <C-g>
-onoremap <C-x>= <C-g>
-inoremap <silent> <M-g> <C-o>:call <SID>GotoLine()<CR>
-vnoremap <silent> <M-g> :<C-u>call <SID>GotoLine()<CR>
-onoremap <silent> <M-g> :call <SID>GotoLine()<CR>
 inoremap <silent> <C-x>g <C-o>:call <SID>GotoLine()<CR>
 vnoremap <silent> <C-x>g :<C-u>call <SID>GotoLine()<CR>
 onoremap <silent> <C-x>g :call <SID>GotoLine()<CR>
 " Word & Sentence forward and backward. 
-inoremap <M-Left> <C-o>( 
-vnoremap <M-Left> (
-onoremap <M-Left> (
-inoremap <M-Right> <C-o>) 
-vnoremap <M-Right> )
-onoremap <M-Right> )
 inoremap <script> <C-Left> <SID>BackwardWord
 vnoremap <script> <C-Left> <SID>VBackwardWord
 onoremap <script> <C-Left> <SID>OBackwardWord
@@ -110,14 +101,11 @@ inoremap <C-Down> <C-o>}
 vnoremap <C-Down> }
 onoremap <C-Down> }
 
-"Incremental 
-"
-"searching.
+"Incremental searching.
 inoremap <C-s> <C-o>:call <SID>StartSearch()<CR><C-o>/
 inoremap <M-s> <C-o>:call <SID>StartSearch()<CR><C-o>?
 " Query & Replace.
-inoremap <M-%> <C-o>:call <SID>QueryReplace()<CR>
-inoremap <C-M-%> <C-o>:call <SID>QueryReplaceRegexp()<CR>
+inoremap <M-r> <C-o>:call <SID>QueryReplace()<CR>
 " Navigate windows.
 noremap <S-Down> <C-w>j
 noremap <S-Up> <C-w>k
@@ -329,16 +317,4 @@ function! <SID>QueryReplace()
     let replacetext_esc = escape(replacetext,'/\')
     execute ".,$s/" . searchtext_esc . "/" . replacetext_esc . "/cg"
     let &magic = magic_status
-endfunction
-
-function! <SID>QueryReplaceRegexp()
-    let searchtext = input("Query replace regexp: ")
-    if searchtext == ""
-        echo "(no text entered): exiting to Insert mode"
-        return
-    endif
-    let replacetext = input("Query replace regexp " . searchtext . " with: ")
-    let searchtext_esc = escape(searchtext,'/')
-    let replacetext_esc = escape(replacetext,'/')
-    execute ".,$s/" . searchtext_esc . "/" . replacetext_esc . "/cg"
 endfunction
