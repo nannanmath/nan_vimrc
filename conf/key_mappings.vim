@@ -33,7 +33,8 @@ inoremap <M-x> <C-o>:
 vnoremap <M-x> <C-c>:
 
 " Set <M-(A~Z)> & <M-<a~z>> as <Esc>+A~Z & <Esc>+a~z.
-for i in range(65,90) + range(97,122)
+" <M-(0~9)> as <Esc>+0~9
+for i in range(65,90) + range(97,122) + range(48,57)
     execute "set <M-" . nr2char(i) . ">=\<Esc>" . nr2char(i)
 endfor
 execute "set <M-%>=\<Esc>%"
@@ -115,6 +116,16 @@ inoremap <S-Down> <ESC><C-w>j
 inoremap <S-Up> <ESC><C-w>k
 inoremap <S-Left> <ESC><C-w>h
 inoremap <S-Right> <ESC><C-w>l
+
+" Copy, Cut and Paste. 
+set sel=exclusive
+inoremap <silent> <C-Space> <C-r>=StartVisualMode()<CR>
+imap <C-@> <C-Space>
+vnoremap <C-g> <Esc>
+vnoremap <C-w> y
+vnoremap <M-w> d
+inoremap <C-y> <C-r><C-o>"
+inoremap <M-y> <C-r>=<SID>YankPop()<CR>
 
 """""""""""""""""""""
 "  Help functions.  "
@@ -318,3 +329,40 @@ function! <SID>QueryReplace()
     execute ".,$s/" . searchtext_esc . "/" . replacetext_esc . "/cg"
     let &magic = magic_status
 endfunction
+
+" Select mode & Start virtual mode.
+function! <SID>StartMarkSel()
+    if &selectmode =~ 'key'
+        set keymodel-=stopsel
+    endif
+endfunction
+function! <SID>StartVirtualMode()
+    call <SID>StartMarkSel()
+    if col('.') >= col('$') && line('.') < line('$')
+        " At EOL
+        return "\<Right>\<C-o>v\<Left>"
+    else
+        return "\<C-o>v"
+    endif
+endfunction
+
+" Pasting
+function! <SID>ResetKillRing()
+    let s:kill_ring_position = 1
+endfunction
+function! <SID>IncrKillRing()
+    if s:kill_ring_position >= 9
+        let s:kill_ring_position = 1
+    else
+        let s:kill_ring_position = s:kill_ring_position + 1
+    endif
+endfunction
+function! <SID>YankPop()
+    undo
+    if !exists("s:kill_ring_position")
+        call <SID>ResetKillRing()
+    endif
+    call <SID>IncrKillRing()
+    return "\<C-r>\<C-o>" . s:kill_ring_position
+endfunction
+

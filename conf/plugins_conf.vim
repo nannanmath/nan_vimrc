@@ -11,10 +11,11 @@ set noshowmode
 """""""""""""""""""""""""""""""""
 " Config nerdtree
 """""""""""""""""""""""""""""""""
-noremap <F3> :NERDTreeToggle<CR>
-inoremap <F3> <ESC>:NERDTreeToggle<CR>
-noremap <leader>qf :NERDTreeFind<CR>
-let g:NERDTreeWinPos="right"
+noremap <M-3> :NERDTreeToggle<CR>
+inoremap <M-3> <ESC>:NERDTreeToggle<CR>
+let g:NERDTreeMapOpenSplit = 's'
+let g:NERDTreeMapOpenVSplit = 'v'
+let g:NERDTreeWinPos="left"
 let NERDTreeShowHidden=0
 let NERDTreeIgnore=['\.pyc$', '\.pyo$', '__pycache__']
 let g:NERDTreeWinSize=35
@@ -30,6 +31,7 @@ let g:bufExplorerFindActive=1
 let g:bufExplorerSortBy='name'
 noremap <C-x><C-b> :BufExplorer<CR>
 inoremap <C-x><C-b> <ESC>:BufExplorer<CR>
+
 """""""""""""""""""""""""""""""""
 " Config mru.vim
 """""""""""""""""""""""""""""""""
@@ -125,7 +127,7 @@ let g:UntiSnipsListSnippets="<C-e>"
 "  Config tagbar  "
 """""""""""""""""""
 " Toggle tarbar.
-noremap <F4> :TagbarToggle<CR>
+noremap <M-4> :TagbarToggle<CR>
 " Autofocus on tagbar when opened.
 let g:tagbar_autofocus=1
 
@@ -133,13 +135,12 @@ let g:tagbar_autofocus=1
 "  Config tasklist  "
 """""""""""""""""""""
 " Show tasks list.
-noremap <F2> :TaskList<CR>
+noremap <M-2> :TaskList<CR>
 
 """""""""""""""""""
 "  Config tabman  "
 """""""""""""""""""
-let g:tabman_toggle='<leader>k'
-let g:tabman_focus='<leader>l'
+let g:tabman_toggle='<M-5>'
 let g:tabman_width=25
 let g:tabman_side='left'
 let g:tabman_specials=0
