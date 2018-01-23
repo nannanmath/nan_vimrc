@@ -17,6 +17,11 @@ cnoremap <C-y> <C-r><C-o>"
 cnoremap <M-w> <C-y>
 cnoremap <C-k> d$<C-c><End>
 
+" Aborting.
+vnoremap <C-g> <Esc>
+cnoremap <C-g> <C-c>
+onoremap <C-g> <C-c>
+
 " Error recovery.
 inoremap <C-_> <C-o>u
 inoremap <C-x><C-u> <C-o>u
@@ -39,22 +44,10 @@ for i in range(65,90) + range(97,122) + range(48,57)
 endfor
 execute "set <M-%>=\<Esc>%"
 execute "set <M-<>=\<Esc><"
+execute "set <M-=>=\<Esc>="
 "set <M->>=\<Esc>>
 execute "set <Char-190>=\<Esc>>"
 " Cursor moving.
-" Left, Right, Up, Down.
-imap <C-b> <Left>
-vmap <C-b> <Left>
-omap <C-b> <Left>
-imap <C-f> <Right>
-vmap <C-f> <Right>
-omap <C-f> <Right>
-imap <C-p> <Up>
-vmap <C-p> <Up>
-omap <C-p> <Up>
-imap <C-n> <Down>
-vmap <C-n> <Down>
-omap <C-n> <Down>
 " Home, End
 imap <C-a> <Home>
 vmap <C-a> <Home>
@@ -107,6 +100,15 @@ inoremap <C-s> <C-o>:call <SID>StartSearch()<CR><C-o>/
 inoremap <M-s> <C-o>:call <SID>StartSearch()<CR><C-o>?
 " Query & Replace.
 inoremap <M-r> <C-o>:call <SID>QueryReplace()<CR>
+
+" Windows operations
+inoremap <C-x>0 <C-o><C-w>c
+inoremap <C-x>1 <C-o><C-w>o
+inoremap <C-x>2 <C-o><C-w>s
+inoremap <C-x>3 <C-o><C-w>v
+inoremap <silent> <C-M-v> <C-o>:ScrollOtherWindow<CR>
+command! ScrollOtherWindow silent! execute "normal! \<C-w>w\<PageDown>\<C-w>W"
+ 
 " Navigate windows.
 noremap <S-Down> <C-w>j
 noremap <S-Up> <C-w>k
@@ -119,13 +121,24 @@ inoremap <S-Right> <ESC><C-w>l
 
 " Copy, Cut and Paste. 
 set sel=exclusive
-inoremap <silent> <C-Space> <C-r>=StartVisualMode()<CR>
+inoremap <silent> <C-Space> <C-r>=<SID>StartVisualMode()<CR>
 imap <C-@> <C-Space>
-vnoremap <C-g> <Esc>
 vnoremap <C-w> y
 vnoremap <M-w> d
 inoremap <C-y> <C-r><C-o>"
 inoremap <M-y> <C-r>=<SID>YankPop()<CR>
+
+" Formatting.
+inoremap <silent> <M-=> <C-o>:call <SID>IndentParagraph()<CR>
+inoremap <silent> <M-q> <C-o>:call <SID>FillParagraph()<CR>
+" Uppercase a word.
+inoremap <M-u> <C-o>gUe<C-o>w
+
+" Bookmark.
+inoremap <C-b> <C-o>:call <SID>PointToRegister()<CR>
+inoremap <C-p> <C-o>:call <SID>JumpToRegister()<CR>
+inoremap <C-x>m <C-o>:marks<CR>
+
 
 """""""""""""""""""""
 "  Help functions.  "
@@ -336,7 +349,7 @@ function! <SID>StartMarkSel()
         set keymodel-=stopsel
     endif
 endfunction
-function! <SID>StartVirtualMode()
+function! <SID>StartVisualMode()
     call <SID>StartMarkSel()
     if col('.') >= col('$') && line('.') < line('$')
         " At EOL
@@ -366,3 +379,26 @@ function! <SID>YankPop()
     return "\<C-r>\<C-o>" . s:kill_ring_position
 endfunction
 
+" Formatting.
+function! <SID>FillParagraph()
+    let old_cursor_pos = <SID>Mark()
+    normal! gqip
+    execute old_cursor_pos
+endfunction
+function! <SID>IndentParagraph()
+    let old_cursor_pos = <SID>Mark()
+    normal! =ip
+    execute old_cursor_pos
+endfunction
+
+" Bookmark.
+function! <SID>PointToRegister()
+    echo "Point to mark: "
+    let c = nr2char(getchar())
+    execute "normal! m" . c
+endfunction
+function! <SID>JumpToRegister()
+    echo "Jump to mark: "
+    let c = nr2char(getchar())
+    execute "normal! `" . c
+endfunction
