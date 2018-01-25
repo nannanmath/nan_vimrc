@@ -32,6 +32,7 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'IndexedSearch'
 Plugin 'fisadev/vim-isort'
 Plugin 'TaskList.vim'
+Plugin 'Shougo/unite.vim'
 call vundle#end()
 
 filetype plugin indent on

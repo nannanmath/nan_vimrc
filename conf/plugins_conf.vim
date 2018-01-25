@@ -40,31 +40,10 @@ noremap <C-x><C-m> :MRU<CR>
 inoremap <C-x><C-m> <ESC>:MRU<CR>
 
 """""""""""""""""""""""""""""""""
-" Config ctrlp
+" Config Unite.vim
 """""""""""""""""""""""""""""""""
-noremap <C-x><C-f> :CtrlP<CR>
-inoremap <C-x><C-f> <ESC>:CtrlP<CR>
-" Show hidden files.
-let g:ctrlp_show_hidden=0
-" Ignore files.
-let g:ctrlp_custom_ignore={
-    \ 'dir': '\v[\/].(git)$',
-    \ 'file': '\v\.(pyc|pyo|so|a)$',
-    \ }
-" Search path.
-let g:ctrlp_working_path_mode='ra'
-" Quickfix window.
-let g:ctrlp_match_window_bottom=1
-let g:ctrlp_max_height=15 
-let g:ctrlp_match_window_reversed=0
-
-" MRU.
-let g:ctrlp_mruf_max=15
-let g:ctrlp_follow_symlinks=1
-
-" Search method.
-let g:ctrlp_by_filename=1
-let g:ctrlp_regexp=0
+noremap <C-x><C-f> :Unite -start-insert file<CR>
+inoremap <C-x><C-f> <C-o>:Unite -start-insert file<CR>
 
 """""""""""""""""""""""""""""""""
 " Config ack
