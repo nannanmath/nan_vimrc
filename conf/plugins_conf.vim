@@ -4,15 +4,39 @@
 set laststatus=2
 if !has('gui_running')
     set t_Co=256
-    colorscheme molokai
 endif
+let g:lightline = {
+      \ 'colorscheme': 'molokai',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'fugitive#head'
+      \ },
+      \ }
 set noshowmode
+set background=dark
+colorscheme molokai
+
+"""""""""""""""""""""""""""""""""
+" Config vim-maximizer
+"""""""""""""""""""""""""""""""""
+let g:maximizer_default_mapping_key = '<F4>'
+
+"""""""""""""""""""""""""""""""""
+" Config obvious-resize
+"""""""""""""""""""""""""""""""""
+noremap <silent> <C-Up> :<C-U>ObviousResizeUp<CR>
+noremap <silent> <C-Down> :<C-U>ObviousResizeDown<CR>
+noremap <silent> <C-Left> :<C-U>ObviousResizeLeft<CR>
+noremap <silent> <C-Right> :<C-U>ObviousResizeRight<CR>
 
 """""""""""""""""""""""""""""""""
 " Config nerdtree
 """""""""""""""""""""""""""""""""
-noremap <M-3> :NERDTreeToggle<CR>
-inoremap <M-3> <ESC>:NERDTreeToggle<CR>
+noremap <F2> :NERDTreeToggle<CR>
+inoremap <F2> <ESC>:NERDTreeToggle<CR>
 let g:NERDTreeMapOpenSplit = 's'
 let g:NERDTreeMapOpenVSplit = 'v'
 let g:NERDTreeWinPos="left"
@@ -23,124 +47,170 @@ let g:NERDTreeDirArrowExpandable='>'
 let g:NERDTreeDirArrowCollapsible='v'
 
 """""""""""""""""""""""""""""""""
-" Config bufexplorer 
+" Config nerdcommenter
 """""""""""""""""""""""""""""""""
-let g:bufExplorerDefaultHelp=0
-let g:bufExplorerShowRelativePath=1
-let g:bufExplorerFindActive=1
-let g:bufExplorerSortBy='name'
-noremap <C-x><C-b> :BufExplorer<CR>
-inoremap <C-x><C-b> <ESC>:BufExplorer<CR>
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+" Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+
+" Add your own custom formats or override the defaults
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+" Enable NERDCommenterToggle to check all selected lines is commented or not 
+let g:NERDToggleCheckAllLines = 1
 
 """""""""""""""""""""""""""""""""
-" Config mru.vim
+" Config ctrlp & ctrlp-funky
 """""""""""""""""""""""""""""""""
-let MRU_Max_Entries=400
-noremap <C-x><C-m> :MRU<CR>
-inoremap <C-x><C-m> <ESC>:MRU<CR>
-
-"""""""""""""""""""""""""""""""""
-" Config Unite.vim
-"""""""""""""""""""""""""""""""""
-noremap <C-x><C-f> :Unite -start-insert file<CR>
-inoremap <C-x><C-f> <C-o>:Unite -start-insert file<CR>
-
-"""""""""""""""""""""""""""""""""
-" Config ack
-"""""""""""""""""""""""""""""""""
-noremap <C-x><C-a> :Ack!<space>
-inoremap <C-x><C-a> <C-o>:Ack!<space>
-
-" Search by ag.
-if executable('ag')
-    let g:ackprg='ag --vimgrep'
-endif
-
-" Hightlight.
-let g:ackhighlight=1
-
-" Empty search.
-let g:ack_use_cword_for_empty_search=1
+let g:ctrlp_map = '<Leader>p'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_match_window_bottom = 1
+let g:ctrlp_max_height = 15
+let g:ctrlp_by_filename = 1
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+    \ 'file': '\v\.(exe|so|dll)$',
+    \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
+    \ }
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+noremap <Leader>r :CtrlPMRUFiles<CR>
+noremap <Leader>b :CtrlPBuffer<CR>
+nnoremap <Leader>fu :CtrlPFunky<Cr>
+" narrow the list down with a word under cursor
+nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 
 """""""""""""""""""""""""""""""""
-" Config syntastic
+" Config gundo
 """""""""""""""""""""""""""""""""
-" Show list of errors and warnings.
-noremap <leader>e :Errors<CR>
-" Turn to next or previous errors.
-noremap <leader>n :lnext<CR>
-noremap <leader>p :lprevious<CR>
+nnoremap <F5> :GundoToggle<CR>
+let g:gundo_width = 60
+let g:gundo_preview_height = 40
+let g:gundo_right = 0
+let g:gundo_preview_bottom = 1
 
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-" check also when just opened the file
-let g:syntastic_check_on_open = 1
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_python_chechers=['pylint']
+"""""""""""""""""""""""""""""""""
+" Config YankRing
+"""""""""""""""""""""""""""""""""
+nnoremap <silent> <F11> :YRShow<CR>
 
 """""""""""""""""""""""""""""""""
 " Config UltiSnips
 """""""""""""""""""""""""""""""""
-let g:UltiSnipsExpandTrigger="<leader><tab>"
-let g:UltiSnipsJumpForwardTrigger="<leader><tab>"
-let g:UltiSnipsJumpBackwardTrigger="<leader><C-z>"
+let g:UltiSnipsExpandTrigger="<C-q>"
+let g:UltiSnipsJumpForwardTrigger="<C-f>"
+let g:UltiSnipsJumpBackwardTrigger="<C-b>"
 let g:UltiSnipsEditSplit="vertical"
 let g:UntiSnipsListSnippets="<C-e>"
 
 """"""""""""""""""""""""""""""
-"  Config vim-expand-region  "
+" Config tabular
 """"""""""""""""""""""""""""""
+if exists(":Tabularize")
+    noremap <Leader>a= :Tabularize /=<CR>
+    noremap <Leader>a: :Tabularize /:\zs<CR>
+    noremap <Leader>a| :Tabularize /|<CR>
+endif
+
+""""""""""""""""""""""""""""""
+" Config vim-expand-region
+""""""""""""""""""""""""""""""
+vnoremap K <Plug>(expand_region_expand)
+vnoremap J <Plug>(expand_region_shrink)
 
 """""""""""""""""""""""""
-"  Config vim-fugitive  "
+" Config vim-bookmarks
 """""""""""""""""""""""""
+let g:bookmark_sign = '>>'
+let g:bookmark_annotation_sign = '##'
+let g:bookmark_highlight_lines  = 1
+let g:bookmark_save_per_working_dir = 1
+let g:bookmark_auto_save = 1
 
+" Finds the Git super-project directory.
+function! g:BMWorkDirFileLocation()
+    let filename = 'bookmarks'
+    let location = ''
+    if isdirectory('.git')
+        " Current work dir is git's work tree
+        let location = getcwd().'/.git'
+    else
+        " Look upwards (at parents) for a directory named '.git'
+        let location = finddir('.git', '.;')
+    endif
+    if len(location) > 0
+        return location.'/.'.filename
+    else
+        return getcwd().'/.'.filename
+    endif
+endfunction
 
+" Avoid keybinding conflicts with the Nerdtree.
+let g:bookmark_no_default_key_mappings = 1
+function! BookmarkMapKeys()
+    nmap mm :BookmarkToggle<CR>
+    nmap mi :BookmarkAnnotate<CR>
+    nmap mn :BookmarkNext<CR>
+    nmap mp :BookmarkPrev<CR>
+    nmap ma :BookmarkShowAll<CR>
+    nmap mc :BookmarkClear<CR>
+    nmap mx :BookmarkClearAll<CR>
+    nmap mkk :BookmarkMoveUp
+    nmap mjj :BookmarkMoveDown
+endfunction
+function! BookmarkUnmapKeys()
+    unmap mm
+    unmap mi
+    unmap mn
+    unmap mp
+    unmap ma
+    unmap mc
+    unmap mx
+    unmap mkk
+    unmap mjj
+endfunction
+autocmd BufEnter * :call BookmarkMapKeys()
+autocmd BufEnter NERD_tree_* :call BookmarkUnmapKeys()
+
+"""""""""""""""""""""""""
+" Config indentLine
+"""""""""""""""""""""""""
+let g:indentLine_char = '|'
 
 """""""""""""""""""
-"  Config tagbar  "
+" Config tabman
 """""""""""""""""""
-" Toggle tarbar.
-noremap <M-4> :TagbarToggle<CR>
-" Autofocus on tagbar when opened.
-let g:tagbar_autofocus=1
-
-"""""""""""""""""""""
-"  Config tasklist  "
-"""""""""""""""""""""
-" Show tasks list.
-noremap <M-2> :TaskList<CR>
-
-"""""""""""""""""""
-"  Config tabman  "
-"""""""""""""""""""
-let g:tabman_toggle='<M-5>'
+let g:tabman_toggle = '<F3>'
+let g:tabman_focus  = '<leader>tf'
 let g:tabman_width=25
 let g:tabman_side='left'
 let g:tabman_specials=0
-let g:tabman_number=1
-
-"""""""""""""""""""""""""
-"  Config vim-markdown & vim-instant-markdown  "
-"""""""""""""""""""""""""
-" Disabled automatically folding
-let g:vim_markdown_folding_disabled=1
-" LeTeX math
-let g:vim_markdown_math=1
-" Highlight YAML frontmatter
-let g:vim_markdown_frontmatter=1
-" vim-instant-markdown will not automatically launch the preview window.
-let g:instant_markdown_autostart=0
-" Server listens to network. Default port is 8090.
-let g:instant_markdown_open_to_the_world=1
+let g:tabman_number=0
 
 """""""""""""""""""""""
-"  Config ConqueTerm  "
+" Config ConqueTerm
 """""""""""""""""""""""
-nnoremap <C-x><C-t> :ConqueTermSplit bash<CR>
-inoremap <C-x><C-t> <ESC>:ConqueTermSplit bash<CR>
+nnoremap <F7> :ConqueTermSplit bash<CR>
+
+
+"""""""""""""""""""""""
+" Config vim-workspace
+"""""""""""""""""""""""
+nnoremap <leader>s :ToggleWorkspace<CR>
+let g:workspace_persist_undo_history = 0
+let g:workspace_autosave_always = 1

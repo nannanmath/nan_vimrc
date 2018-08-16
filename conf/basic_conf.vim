@@ -52,8 +52,11 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set smarttab
-" Tab length on some file types.
+" Tab length on specific file types.
 autocmd FileType c,cpp setloack shiftwidth=2 tabstop=2 softtabstop=2
+
+" Highlight the 80th column for length limitation.
+autocmd FileType c,cpp set cc=80
 
 " Linebreak
 set lbr

@@ -14,35 +14,145 @@ The `leader` is `,`.
 
 ### Plugin related mappings
 
-[NERD Tree](https://github.com/scrooloose/nerdtree) mappings:
+* [vim-maximizer][]
+```viml
+let g:maximizer_default_mapping_key = '<F4>'
+```
 
-    noremap <F3> :NERDTreeToggle<CR>
-    inoremap <F3> <ESC>:NERDTreeToggle<CR>
+* [obvious-resize][]
+```viml
+noremap <silent> <C-Up> :<C-U>ObviousResizeUp<CR>
+noremap <silent> <C-Down> :<C-U>ObviousResizeDown<CR>
+noremap <silent> <C-Left> :<C-U>ObviousResizeLeft<CR>
+noremap <silent> <C-Right> :<C-U>ObviousResizeRight<CR>
+```
 
-[bufexplorer](https://github.com/vim-scripts/bufexplorer.zip) mappings:
+* [vim-windowswap][]
+```viml
+nnoremap <silent> <leader>yw :call WindowSwap#MarkWindowSwap()<CR>
+nnoremap <silent> <leader>pw :call WindowSwap#DoWindowSwap()<CR>
+nnoremap <silent> <leader>ww :call WindowSwap#EasyWindowSwap()<CR>
+```
 
-    noremap <C-x>b :BufExplorer<CR>
-    inoremap <C-x>b <ESC>:BufExplorer<CR>
+* [NERD Tree][]
+```viml
+noremap <F2> :NERDTreeToggle<CR>
+inoremap <F2> <ESC>:NERDTreeToggle<CR>
+let g:NERDTreeMapOpenSplit = 's'
+let g:NERDTreeMapOpenVSplit = 'v'
+```
 
-[MRU](http://www.vim.org/scripts/script.php?script_id=521) Mappings:
+* [NERD Commenter][]
+|       Action       |        Command        |
+|--------------------|-----------------------|
+|    `<leader>cc`    |     NERDComComment    |
+| `<leader>c<space>` |  NERDComToggleComment |
 
-    noremap <C-x>m :MRU<CR>
-    inoremap <C-x>m <ESC>:MRU<CR>
+* [CtrlP][]
+```viml
+let g:ctrlp_map = '<Leader>p'
+let g:ctrlp_cmd = 'CtrlP'
+noremap <Leader>r :CtrlPMRUFiles<CR>
+noremap <Leader>b :CtrlPBuffer<CR>
+```
 
-[CtrlP](https://github.com/kien/ctrlp.vim) mappings:
-    
-    let g:ctrlp_map='<C-x>f'
-    let g:ctrlp_cmd='CtrlP'
-    nnoremap <leader>sm :CtrlPMRU<CR>
-    nnoremap <leader>sb :CtrlPBuffer<CR>
+* [CtrlP-funky][]
+```viml
+nnoremap <Leader>fu :CtrlPFunky<Cr>
+nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+```
 
-[Ack](https://github.com/mileszs/ack.vim) mappings:
+* [vim-buffergator][]
+| Action  |                 Command                |
+|---------|----------------------------------------|
+| `<C-V>` |  open a window listing all buffers     |
+| `<C-V>` |  open buffer in a new vertical split   |
+| `<C-S>` |  open buffer in a new horizental split |
+| `<C-T>` |  open buffer in a new tab              |
 
-    noremap <C-x>a :Ack!<space>
-    inoremap <C-x>a <ESC>:Ack!<space>
+* [vim-bufkill][]
+```viml
+map <C-c> :BD<cr>
+```
 
-ss
+* [gundo][]
+```viml
+nnoremap <F5> :GundoToggle<CR>
+```
+
+* [YankRing][]
+| Action  |            Command           |
+|---------|------------------------------|
+|  `F11`  |  Display YankRing's contents |
+| `<C-P>` |  Previous item               |
+| `<C-N>` |  Next item                   |
+
+* [UltiSnips][]
+| Action  |            Command           |
+|---------|------------------------------|
+| `<C-q>` |  Snips expand                |
+| `<C-f>` |  Jump forward                |
+| `<C-b>` |  Jump backward               |
+
+* [tabular][]
+```viml
+noremap <Leader>a= :Tabularize /=<CR>
+noremap <Leader>a: :Tabularize /:\zs<CR>
+noremap <Leader>a| :Tabularize /|<CR>
+```
+
+* [vim-expand-region][]
+```viml
+vnoremap K <Plug>(expand_region_expand)
+vnoremap J <Plug>(expand_region_shrink
+```
+
+* [vim-bookmarks][]
+```viml
+nmap <Leader><Leader> <Plug>BookmarkToggle
+nmap <Leader>i <Plug>BookmarkAnnotate
+nmap <Leader>a <Plug>BookmarkShowAll
+nmap <Leader>j <Plug>BookmarkNext
+nmap <Leader>k <Plug>BookmarkPrev
+nmap <Leader>c <Plug>BookmarkClear
+nmap <Leader>x <Plug>BookmarkClearAll
+nmap <Leader>kk <Plug>BookmarkMoveUp
+nmap <Leader>jj <Plug>BookmarkMoveDown
+nmap <Leader>g <Plug>BookmarkMoveToLine
+```
+
+* [tabman][]
+```viml
+let g:tabman_toggle = '<F3>'
+let g:tabman_focus  = '<leader>tf'
+```
+
+* [ConqueTerm][]
+```viml
+nnoremap <F7> :ConqueTermSplit bash<CR>
+```
+
+* [vim-workspace][]
+```viml
+nnoremap <leader>s :ToggleWorkspace<CR>
+```
 
 
-
-    
+  [vim-maximizer]: https://github.com/szw/vim-maximizer
+  [obvious-resize]: https://github.com/talek/obvious-resize
+  [vim-windowswap]: https://github.com/wesq3/vim-windowswap
+  [NERD Tree]: https://github.com/scrooloose/nerdtree
+  [NERD Commenter]: https://github.com/scrooloose/nerdcommenter
+  [CtrlP]: https://github.com/kien/ctrlp.vim
+  [CtrlP-funky]: https://github.com/tacahiroy/ctrlp-funky
+  [vim-buffergator]: https://github.com/jeetsukumaran/vim-buffergator
+  [vim-bufkill]: https://github.com/qpkorr/vim-bufkill
+  [gundo]: https://github.com/sjl/gundo.vim
+  [YankRing]: https://github.com/vim-scripts/YankRing.vim
+  [UltiSnips]: https://github.com/sirver/ultisnips
+  [tabular]: https://github.com/godlygeek/tabular
+  [vim-expand-region]: https://github.com/terryma/vim-expand-region
+  [vim-bookmarks]: https://github.com/mattesgroeger/vim-bookmarks
+  [tabman]: https://github.com/kien/tabman.vim
+  [ConqueTerm]: https://github.com/rosenfeld/conque-term
+  [vim-workspace]: https://github.com/thaerkh/vim-workspace
