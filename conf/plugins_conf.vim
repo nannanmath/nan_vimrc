@@ -1,23 +1,31 @@
-"""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""
 " Config molokai & lightline
 """""""""""""""""""""""""""""""""
 set laststatus=2
 if !has('gui_running')
     set t_Co=256
 endif
-let g:lightline = {
-      \ 'colorscheme': 'molokai',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'fugitive#head'
-      \ },
-      \ }
-set noshowmode
+syntax enable
 set background=dark
-colorscheme molokai
+colorscheme solarized
+"let g:molokai_original=1
+"let g:rehash256=1
+let g:solarized_termcolors=256
+let g:lightline = {
+    \ 'colorscheme': 'solarized',
+    \ 'active': {
+    \   'left': [ [ 'mode', 'paste' ],
+    \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+    \ },
+    \ 'component_function': {
+    \   'gitbranch': 'fugitive#head'
+    \ },
+    \ }
+set noshowmode
+
+" Highlight the 80th column for length limitation.
+set colorcolumn=80
+highlight colorcolumn ctermbg=DarkRed
 
 """""""""""""""""""""""""""""""""
 " Config vim-maximizer
@@ -37,11 +45,12 @@ noremap <silent> <C-Right> :<C-U>ObviousResizeRight<CR>
 """""""""""""""""""""""""""""""""
 noremap <F2> :NERDTreeToggle<CR>
 inoremap <F2> <ESC>:NERDTreeToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let g:NERDTreeMapOpenSplit = 's'
 let g:NERDTreeMapOpenVSplit = 'v'
 let g:NERDTreeWinPos="left"
-let NERDTreeShowHidden=0
-let NERDTreeIgnore=['\.pyc$', '\.pyo$', '__pycache__']
+let g:NERDTreeShowHidden=1
+let g:NERDTreeIgnore=['\.pyc$', '\.pyo$', '__pycache__']
 let g:NERDTreeWinSize=35
 let g:NERDTreeDirArrowExpandable='>'
 let g:NERDTreeDirArrowCollapsible='v'
@@ -96,18 +105,14 @@ nnoremap <Leader>fu :CtrlPFunky<Cr>
 nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 
 """""""""""""""""""""""""""""""""
-" Config gundo
+" Config Undotree
 """""""""""""""""""""""""""""""""
-nnoremap <F5> :GundoToggle<CR>
-let g:gundo_width = 60
-let g:gundo_preview_height = 40
-let g:gundo_right = 0
-let g:gundo_preview_bottom = 1
+nnoremap <F5> :UndotreeToggle<CR>
 
 """""""""""""""""""""""""""""""""
 " Config YankRing
 """""""""""""""""""""""""""""""""
-nnoremap <silent> <F11> :YRShow<CR>
+nnoremap <silent> <F6> :YRShow<CR>
 
 """""""""""""""""""""""""""""""""
 " Config UltiSnips
@@ -117,21 +122,6 @@ let g:UltiSnipsJumpForwardTrigger="<C-f>"
 let g:UltiSnipsJumpBackwardTrigger="<C-b>"
 let g:UltiSnipsEditSplit="vertical"
 let g:UntiSnipsListSnippets="<C-e>"
-
-""""""""""""""""""""""""""""""
-" Config tabular
-""""""""""""""""""""""""""""""
-if exists(":Tabularize")
-    noremap <Leader>a= :Tabularize /=<CR>
-    noremap <Leader>a: :Tabularize /:\zs<CR>
-    noremap <Leader>a| :Tabularize /|<CR>
-endif
-
-""""""""""""""""""""""""""""""
-" Config vim-expand-region
-""""""""""""""""""""""""""""""
-vnoremap K <Plug>(expand_region_expand)
-vnoremap J <Plug>(expand_region_shrink)
 
 """""""""""""""""""""""""
 " Config vim-bookmarks
@@ -190,7 +180,9 @@ autocmd BufEnter NERD_tree_* :call BookmarkUnmapKeys()
 """""""""""""""""""""""""
 " Config indentLine
 """""""""""""""""""""""""
-let g:indentLine_char = '|'
+let g:indentLine_char = '┆'
+let g:indentLine_color_term = 239
+let g:indentLine_leadingSpaceEnabled = 1
 
 """""""""""""""""""
 " Config tabman
@@ -207,10 +199,19 @@ let g:tabman_number=0
 """""""""""""""""""""""
 nnoremap <F7> :ConqueTermSplit bash<CR>
 
+"""""""""""""""""""""""
+" Config xolox/vim-session
+"""""""""""""""""""""""
+let g:session_autoload = 'no'
+nnoremap <leader>ss :SaveSession<CR>
+nnoremap <leader>so :OpenSession<CR>
+
 
 """""""""""""""""""""""
-" Config vim-workspace
+" Config Tabular
 """""""""""""""""""""""
-nnoremap <leader>s :ToggleWorkspace<CR>
-let g:workspace_persist_undo_history = 0
-let g:workspace_autosave_always = 1
+noremap <C-a> :Tabularize /
+
+
+
+

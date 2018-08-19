@@ -10,8 +10,10 @@ let s:install_dir = expand('<sfile>:p:h')."/.."
 call vundle#begin(s:install_dir . '/plugins')
 
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'altercation/vim-colors-solarized'
 Plugin 'itchyny/lightline.vim'
-Plugin 'tomasr/molokai'
+Plugin 'haya14busa/incsearch.vim'
+Plugin 'jiangmiao/auto-pairs'
 Plugin 'szw/vim-maximizer'
 Plugin 'talek/obvious-resize'
 Plugin 'wesQ3/vim-windowswap'
@@ -21,7 +23,7 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'tacahiroy/ctrlp-funky'
 Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'qpkorr/vim-bufkill'
-Plugin 'sjl/gundo.vim'
+Plugin 'mbbill/undotree'
 Plugin 'vim-scripts/YankRing.vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
@@ -36,7 +38,8 @@ Plugin 'kien/tabman.vim'
 Plugin 'IndexedSearch'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'rosenfeld/conque-term'
-Plugin 'thaerkh/vim-workspace'
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-session'
 
 call vundle#end()
 

@@ -1,18 +1,23 @@
 # Introduction
 
-This is my vimrc. It is constantly eloving.
+nan-vim is a private vim configuration which is welcome to be used by others.
+It's tested on [MobaXterm][] for SSH to remote Linux host.
 
 ## Installation
 
+```bash
 git clone --recursive https://github.com/nannanmath/nan_vimrc.git ~/.nan_vimrc
-    cd .nan_vimrc
+cd .nan_vimrc
 ./install
+```
 
 ## Key Mappings
 
-The `leader` is `,`.
+The `<leader>` is `,`.
 
-### Plugin related mappings
+### Configurations for Plugins
+
+You can customize these mappings as you like.
 
 * [vim-maximizer][]
 ```viml
@@ -21,10 +26,10 @@ let g:maximizer_default_mapping_key = '<F4>'
 
 * [obvious-resize][]
 ```viml
-noremap <silent> <C-Up> :<C-U>ObviousResizeUp<CR>
-noremap <silent> <C-Down> :<C-U>ObviousResizeDown<CR>
-noremap <silent> <C-Left> :<C-U>ObviousResizeLeft<CR>
-noremap <silent> <C-Right> :<C-U>ObviousResizeRight<CR>
+noremap <silent> <C-Up>    : <C-U>ObviousResizeUp<CR>
+noremap <silent> <C-Down>  : <C-U>ObviousResizeDown<CR>
+noremap <silent> <C-Left>  : <C-U>ObviousResizeLeft<CR>
+noremap <silent> <C-Right> : <C-U>ObviousResizeRight<CR>
 ```
 
 * [vim-windowswap][]
@@ -43,10 +48,11 @@ let g:NERDTreeMapOpenVSplit = 'v'
 ```
 
 * [NERD Commenter][]
-|       Action       |        Command        |
-|--------------------|-----------------------|
-|    `<leader>cc`    |     NERDComComment    |
-| `<leader>c<space>` |  NERDComToggleComment |
+
+| Action               | Command                 |
+| -------------------- | ----------------------- |
+| `<leader>cc`         | NERDComComment          |
+| `<leader>c<space>`   | NERDComToggleComment    |
 
 * [CtrlP][]
 ```viml
@@ -63,62 +69,64 @@ nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 ```
 
 * [vim-buffergator][]
-| Action  |                 Command                |
-|---------|----------------------------------------|
-| `<C-V>` |  open a window listing all buffers     |
-| `<C-V>` |  open buffer in a new vertical split   |
-| `<C-S>` |  open buffer in a new horizental split |
-| `<C-T>` |  open buffer in a new tab              |
+
+| Action      | Command                                  |
+| ---------   | ---------------------------------------- |
+| `<Leader>b` | open a window listing all buffers        |
+| `<C-V>`     | open buffer in a new vertical split      |
+| `<C-S>`     | open buffer in a new horizental split    |
+| `<C-T>`     | open buffer in a new tab                 |
 
 * [vim-bufkill][]
 ```viml
 map <C-c> :BD<cr>
 ```
 
-* [gundo][]
+* [Undotree][]
 ```viml
-nnoremap <F5> :GundoToggle<CR>
+nnoremap <F5> :UndotreeToggle<CR>
 ```
 
 * [YankRing][]
-| Action  |            Command           |
-|---------|------------------------------|
-|  `F11`  |  Display YankRing's contents |
-| `<C-P>` |  Previous item               |
-| `<C-N>` |  Next item                   |
+
+| Action    | Command                        |
+| --------- | ------------------------------ |
+| `F6`      | Display YankRing's contents    |
+| `<C-P>`   | Previous item                  |
+| `<C-N>`   | Next item                      |
 
 * [UltiSnips][]
-| Action  |            Command           |
-|---------|------------------------------|
-| `<C-q>` |  Snips expand                |
-| `<C-f>` |  Jump forward                |
-| `<C-b>` |  Jump backward               |
+
+| Action    | Command                        |
+| --------- | ------------------------------ |
+| `<C-q>`   | Snips expand                   |
+| `<C-f>`   | Jump forward                   |
+| `<C-b>`   | Jump backward                  |
 
 * [tabular][]
-```viml
-noremap <Leader>a= :Tabularize /=<CR>
-noremap <Leader>a: :Tabularize /:\zs<CR>
-noremap <Leader>a| :Tabularize /|<CR>
-```
+
+| Action    | Command            |
+| --------- | --------           |
+| `<C-a>`   | Input for aligning |
 
 * [vim-expand-region][]
-```viml
-vnoremap K <Plug>(expand_region_expand)
-vnoremap J <Plug>(expand_region_shrink
-```
+
+| Action    | Command       |
+| --------- | --------      |
+| `+`       | Expand region |
+| `_`       | Shrink region |
 
 * [vim-bookmarks][]
 ```viml
-nmap <Leader><Leader> <Plug>BookmarkToggle
-nmap <Leader>i <Plug>BookmarkAnnotate
-nmap <Leader>a <Plug>BookmarkShowAll
-nmap <Leader>j <Plug>BookmarkNext
-nmap <Leader>k <Plug>BookmarkPrev
-nmap <Leader>c <Plug>BookmarkClear
-nmap <Leader>x <Plug>BookmarkClearAll
-nmap <Leader>kk <Plug>BookmarkMoveUp
-nmap <Leader>jj <Plug>BookmarkMoveDown
-nmap <Leader>g <Plug>BookmarkMoveToLine
+nmap mm :BookmarkToggle<CR>
+nmap mi :BookmarkAnnotate<CR>
+nmap mn :BookmarkNext<CR>
+nmap mp :BookmarkPrev<CR>
+nmap ma :BookmarkShowAll<CR>
+nmap mc :BookmarkClear<CR>
+nmap mx :BookmarkClearAll<CR>
+nmap mkk :BookmarkMoveUp
+nmap mjj :BookmarkMoveDown
 ```
 
 * [tabman][]
@@ -137,7 +145,7 @@ nnoremap <F7> :ConqueTermSplit bash<CR>
 nnoremap <leader>s :ToggleWorkspace<CR>
 ```
 
-
+  [MobaXterm]: https://mobaxterm.mobatek.net
   [vim-maximizer]: https://github.com/szw/vim-maximizer
   [obvious-resize]: https://github.com/talek/obvious-resize
   [vim-windowswap]: https://github.com/wesq3/vim-windowswap
@@ -147,7 +155,7 @@ nnoremap <leader>s :ToggleWorkspace<CR>
   [CtrlP-funky]: https://github.com/tacahiroy/ctrlp-funky
   [vim-buffergator]: https://github.com/jeetsukumaran/vim-buffergator
   [vim-bufkill]: https://github.com/qpkorr/vim-bufkill
-  [gundo]: https://github.com/sjl/gundo.vim
+  [undotree]: https://github.com/mbbill/undotree
   [YankRing]: https://github.com/vim-scripts/YankRing.vim
   [UltiSnips]: https://github.com/sirver/ultisnips
   [tabular]: https://github.com/godlygeek/tabular
