@@ -28,6 +28,25 @@ set colorcolumn=80
 highlight colorcolumn ctermbg=DarkRed
 
 """""""""""""""""""""""""""""""""
+" Config vim-move
+"""""""""""""""""""""""""""""""""
+let g:move_map_keys = 0
+vmap J <Plug>MoveBlockDown
+vmap K <Plug>MoveBlockUp
+nmap J <Plug>MoveLineDown
+nmap K <Plug>MoveLineUp
+"let g:move_key_modifier = 'M'
+
+
+"""""""""""""""""""""""""""""""""
+" Config incsearch
+"""""""""""""""""""""""""""""""""
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+nnoremap <Esc><Esc> :<C-u>nohlsearch<CR>
+
+"""""""""""""""""""""""""""""""""
 " Config vim-maximizer
 """""""""""""""""""""""""""""""""
 let g:maximizer_default_mapping_key = '<F4>'
@@ -39,6 +58,11 @@ noremap <silent> <C-Up> :<C-U>ObviousResizeUp<CR>
 noremap <silent> <C-Down> :<C-U>ObviousResizeDown<CR>
 noremap <silent> <C-Left> :<C-U>ObviousResizeLeft<CR>
 noremap <silent> <C-Right> :<C-U>ObviousResizeRight<CR>
+
+"""""""""""""""""""""""""""""""""
+" Config vim-rooter
+"""""""""""""""""""""""""""""""""
+let g:rooter_change_directory_for_non_project_files = 'current'
 
 """""""""""""""""""""""""""""""""
 " Config nerdtree
@@ -100,14 +124,11 @@ let g:ctrlp_custom_ignore = {
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
 noremap <Leader>r :CtrlPMRUFiles<CR>
 noremap <Leader>b :CtrlPBuffer<CR>
-nnoremap <Leader>fu :CtrlPFunky<Cr>
-" narrow the list down with a word under cursor
-nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 
 """""""""""""""""""""""""""""""""
 " Config Undotree
 """""""""""""""""""""""""""""""""
-nnoremap <F5> :UndotreeToggle<CR>
+nnoremap <F7> :UndotreeToggle<CR>
 
 """""""""""""""""""""""""""""""""
 " Config YankRing
@@ -117,11 +138,11 @@ nnoremap <silent> <F6> :YRShow<CR>
 """""""""""""""""""""""""""""""""
 " Config UltiSnips
 """""""""""""""""""""""""""""""""
-let g:UltiSnipsExpandTrigger="<C-q>"
+let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<C-f>"
 let g:UltiSnipsJumpBackwardTrigger="<C-b>"
 let g:UltiSnipsEditSplit="vertical"
-let g:UntiSnipsListSnippets="<C-e>"
+"let g:UntiSnipsListSnippets="<C-e>"
 
 """""""""""""""""""""""""
 " Config vim-bookmarks
@@ -194,23 +215,43 @@ let g:tabman_side='left'
 let g:tabman_specials=0
 let g:tabman_number=0
 
+
+"""""""""""""""""""
+" Config YCM
+""""""""""""""""""""
+let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
+let g:ycm_complete_in_comments = 1
+let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_global_ycm_extra_conf = '~/.nan_vimrc/conf/ycm_extra_conf.py'
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_key_invoke_completion = '<C-a>'
+let g:ycm_key_list_select_completion = ['<Down>']
+let g:ycm_key_list_previous_completion = ['<Up>']
+"let g:ycm_server_python_interpreter = ''
+nnoremap <leader>j :YcmCompleter GoTo<CR>
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
+
+
 """""""""""""""""""""""
 " Config ConqueTerm
 """""""""""""""""""""""
-nnoremap <F7> :ConqueTermSplit bash<CR>
+nnoremap <F8> :ConqueTermSplit bash<CR>
 
 """""""""""""""""""""""
 " Config xolox/vim-session
 """""""""""""""""""""""
 let g:session_autoload = 'no'
-nnoremap <leader>ss :SaveSession<CR>
-nnoremap <leader>so :OpenSession<CR>
+nnoremap <leader>ss :SaveSession 
+nnoremap <leader>so :OpenSession 
 
 
 """""""""""""""""""""""
 " Config Tabular
 """""""""""""""""""""""
-noremap <C-a> :Tabularize /
+noremap <C-l> :Tabularize /
 
 
 

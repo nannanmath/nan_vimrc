@@ -34,6 +34,8 @@ set ruler
 set cursorcolumn
 set cursorline
 
+set hlsearch
+
 " Turn mouse off.
 set mouse-=a
 
@@ -53,7 +55,7 @@ set softtabstop=4
 set shiftwidth=4
 set smarttab
 " Tab length on specific file types.
-autocmd FileType c,cpp setloack shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType c,cpp set shiftwidth=2 | set tabstop=2 | set softtabstop=2
 
 " Linebreak
 set lbr

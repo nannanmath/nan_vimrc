@@ -1,150 +1,193 @@
 # Introduction
 
 nan-vim is a private vim configuration which is welcome to be used by others.
-It's tested on [MobaXterm][] for SSH to remote Linux host.
+It's designed for remote logins by SSH. 
+This confiuration is tested on [MobaXterm][] based MS-Windows as local host and Ubuntu Server 16.04 as remote host.
 
-## Installation
+# Installation
+ 
+* Install plugins
 
-```bash
+```sh
 git clone --recursive https://github.com/nannanmath/nan_vimrc.git ~/.nan_vimrc
 cd .nan_vimrc
 ./install
 ```
 
-## Key Mappings
+* Install YouCompleteMe
+ Please refer to [YCM Installation][https://github.com/valloric/youcompleteme#installation]
 
-The `<leader>` is `,`.
+# Usage
 
-### Configurations for Plugins
+ * `<leader>` is `,`.
 
-You can customize these mappings as you like.
+## Features
 
-* [vim-maximizer][]
-```viml
-let g:maximizer_default_mapping_key = '<F4>'
-```
+### Display & Basic Operation
 
-* [obvious-resize][]
-```viml
-noremap <silent> <C-Up>    : <C-U>ObviousResizeUp<CR>
-noremap <silent> <C-Down>  : <C-U>ObviousResizeDown<CR>
-noremap <silent> <C-Left>  : <C-U>ObviousResizeLeft<CR>
-noremap <silent> <C-Right> : <C-U>ObviousResizeRight<CR>
-```
+ * Colorscheme & Status line.
+   [Solarized][] Colorscheme with dark baclgroud.
+   Status line is based on [lightline.vim][] plugin.
+ * Cpp highlight enhanced by [vim-cpp-enhanced-highlight][].
+ * Auto-completion for quotes, parens, brackets.
+ * Incremental searching.
+ * Auto-changing working directory to the project root.
+ * Display the indention levels with thin vertical lines.
+ * Highlight line and column of current cursor.
+ * Limit line length for red color of the 80-th column.
 
-* [vim-windowswap][]
-```viml
-nnoremap <silent> <leader>yw :call WindowSwap#MarkWindowSwap()<CR>
-nnoremap <silent> <leader>pw :call WindowSwap#DoWindowSwap()<CR>
-nnoremap <silent> <leader>ww :call WindowSwap#EasyWindowSwap()<CR>
-```
+### Resize and Maximize window
 
-* [NERD Tree][]
-```viml
-noremap <F2> :NERDTreeToggle<CR>
-inoremap <F2> <ESC>:NERDTreeToggle<CR>
-let g:NERDTreeMapOpenSplit = 's'
-let g:NERDTreeMapOpenVSplit = 'v'
-```
+This feature is based on [vim-maximizer][] and [obvious-resize][].
 
-* [NERD Commenter][]
+| Shortcut             | Function                            |
+| -------------------- | -----------------------             |
+| `<C-Up>`             | Resize window up.                   |
+| `<C-Down>`           | Resize window down.                 |
+| `<C-Left>`           | Resize window left.                 |
+| `<C-Right>`          | Resize window right.                |
+| `<F4>`               | Toggle maximize / restore a window. |
 
-| Action               | Command                 |
+### Directory explore
+
+This feature is based on [NERD Tree][] plugin.
+
+| Shortcut             | Function                               |
+| -------------------- | -----------------------                |
+| `<F2>`               | Toggle NERD Tree                       |
+| `s`                  | Open buffer in horizental split window |
+| `v`                  | Open buffer in vertical split window   |
+
+### Comment function
+
+This feature is based on [NERD Commenter][] plugin.
+
+| Shortcut             | Function                |
 | -------------------- | ----------------------- |
-| `<leader>cc`         | NERDComComment          |
-| `<leader>c<space>`   | NERDComToggleComment    |
+| `<leader>c<space>`   | Toggle comment state    |
 
-* [CtrlP][]
-```viml
-let g:ctrlp_map = '<Leader>p'
-let g:ctrlp_cmd = 'CtrlP'
-noremap <Leader>r :CtrlPMRUFiles<CR>
-noremap <Leader>b :CtrlPBuffer<CR>
-```
+More details can be found from [NERD Commenter][].
 
-* [CtrlP-funky][]
-```viml
-nnoremap <Leader>fu :CtrlPFunky<Cr>
-nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
-```
+### Find
 
-* [vim-buffergator][]
+This feature is based on [CtrlP][] and [Ctrlp-funky][].
 
-| Action      | Command                                  |
-| ---------   | ---------------------------------------- |
-| `<Leader>b` | open a window listing all buffers        |
-| `<C-V>`     | open buffer in a new vertical split      |
-| `<C-S>`     | open buffer in a new horizental split    |
-| `<C-T>`     | open buffer in a new tab                 |
+| Shortcut             | Function                          |
+| -------------------- | -----------------------           |
+| `<leader>p`          | Find file in a porject directory. |
+| `<leader>r`          | Find in MRU files.                |
+| `<leader>b`          | Find in buffers.                  |
 
-* [vim-bufkill][]
-```viml
-map <C-c> :BD<cr>
-```
+### Buffers
 
-* [Undotree][]
-```viml
-nnoremap <F5> :UndotreeToggle<CR>
-```
+This feature is based on [vim-buffergator][] and [vim-bufkill][].
 
-* [YankRing][]
+| Shortcut             | Function                                |
+| -------------------- | -----------------------                 |
+| `<leader>b`          | Open a window listing all buffers.      |
+| `<C-s>`              | Open buffer in horizental split window. |
+| `<C-v>`              | Open buffer in vertical split window.   |
+| `<C-t>`              | Open buffer in a new tab.               |
+| `:BD`                | Wipe a file from buffer.                |
 
-| Action    | Command                        |
-| --------- | ------------------------------ |
-| `F6`      | Display YankRing's contents    |
-| `<C-P>`   | Previous item                  |
-| `<C-N>`   | Next item                      |
+More details can be found from [vim-bufkill][].
 
-* [UltiSnips][]
+### Undo & Yank
 
-| Action    | Command                        |
-| --------- | ------------------------------ |
-| `<C-q>`   | Snips expand                   |
-| `<C-f>`   | Jump forward                   |
-| `<C-b>`   | Jump backward                  |
+This feature is based on [UndoTree][] and [YankRing][].
 
-* [tabular][]
+| Shortcut             | Function                      |
+| -------------------- | -----------------------       |
+| `<F6>`               | Show a Yank ring.             |
+| `<F7>`               | Show a Undo tree in a window. |
 
-| Action    | Command            |
-| --------- | --------           |
-| `<C-a>`   | Input for aligning |
+### Snippets
 
-* [vim-expand-region][]
+This feature is based on [Unltisnips][] and [vim-snippets][].
 
-| Action    | Command       |
-| --------- | --------      |
-| `+`       | Expand region |
-| `_`       | Shrink region |
+| Shortcut             | Function                 |
+| -------------------- | -----------------------  |
+| `<Tab>`              | Snippets expand trigger. |
+| `<C-f>`              | Snippets jump forward.   |
+| `<C-b>`              | Snippets jump backward.  |
 
-* [vim-bookmarks][]
-```viml
-nmap mm :BookmarkToggle<CR>
-nmap mi :BookmarkAnnotate<CR>
-nmap mn :BookmarkNext<CR>
-nmap mp :BookmarkPrev<CR>
-nmap ma :BookmarkShowAll<CR>
-nmap mc :BookmarkClear<CR>
-nmap mx :BookmarkClearAll<CR>
-nmap mkk :BookmarkMoveUp
-nmap mjj :BookmarkMoveDown
-```
+### Bookmark
 
-* [tabman][]
-```viml
-let g:tabman_toggle = '<F3>'
-let g:tabman_focus  = '<leader>tf'
-```
+This feature is based on [vim-bookmarks][].
 
-* [ConqueTerm][]
-```viml
-nnoremap <F7> :ConqueTermSplit bash<CR>
-```
+| Shortcut             | Function                                |
+| -------------------- | -----------------------                 |
+| `mm`                 | Add / Remove book mark at current line. |
+| `mn`                 | Jump to next bookmark in buffer.        |
+| `mp`                 | Jump tp previous bookmark in buffer.    |
+| `ma`                 | Show all bookmarks.                     |
+| `mc`                 | Clear bookmarks in current buffer.      |
+| `mx`                 | Ckear all bookmarks.                    |
 
-* [vim-workspace][]
-```viml
-nnoremap <leader>s :ToggleWorkspace<CR>
-```
+More details can be found from [vim-bookmarks][].
 
+### Aligning
+
+This feature is based on [Tabular][].
+
+| Shortcut             | Command                 |
+| -------------------- | ----------------------- |
+| `<C-l>`              | :Tabularize /           |
+
+Input the character you want to align and press Enter.
+
+### Resion expand
+
+This feature is based on [vim-region-expand][].
+
+| Shortcut             | Function                 |
+| -------------------- | -----------------------  |
+| `+`                  | Expand selective region. |
+| `_`                  | Narrow selective region. |
+
+### Tabs
+
+This feature is based on [Tabman][].
+
+| Shortcut             | Function                                   |
+| -------------------- | -----------------------                    |
+| `<F3>`               | Toggle Tabman window for listing all tabs. |
+| `<leader>tf`         | Focus on tabman window.                    |
+
+### Completion
+
+This feature is based on [YouCompleteMe][].
+
+
+| Shortcut             | Function                  |
+| -------------------- | -----------------------   |
+| `<C-a>`              | Invoke YCM Completion.    |
+| `<Down>`             | List select completion.   |
+| `Up`                 | List previous completion. |
+| `<leader>j`          | Goto                      |
+
+### Term
+
+This feature is based on [conque-term][].
+
+| Shortcut             | Function                |
+| -------------------- | ----------------------- |
+| `<F8>`               | Open a term.            |
+
+### Session
+
+This feature is based on [vim-session][].
+
+| Shortcut             | Command                 |
+| -------------------- | ----------------------- |
+| `<leader>ss`         | :SaveSession            |
+| `<leader>so`         | :OpenSession            |
+  
+  
+  
+  [Solarized]: https://github.com/altercation/vim-colors-solarized
+  [lightline.vim]: https://github.com/itchyny/lightline.vim
+  [vim-cpp-enhanced-highlight]: https://github.com/octol/vim-cpp-enhanced-highlight
   [MobaXterm]: https://mobaxterm.mobatek.net
   [vim-maximizer]: https://github.com/szw/vim-maximizer
   [obvious-resize]: https://github.com/talek/obvious-resize
@@ -155,12 +198,14 @@ nnoremap <leader>s :ToggleWorkspace<CR>
   [CtrlP-funky]: https://github.com/tacahiroy/ctrlp-funky
   [vim-buffergator]: https://github.com/jeetsukumaran/vim-buffergator
   [vim-bufkill]: https://github.com/qpkorr/vim-bufkill
-  [undotree]: https://github.com/mbbill/undotree
+  [UndoTree]: https://github.com/mbbill/undotree
   [YankRing]: https://github.com/vim-scripts/YankRing.vim
   [UltiSnips]: https://github.com/sirver/ultisnips
-  [tabular]: https://github.com/godlygeek/tabular
+  [vim-snippets]: https://github.com/honza/vim-snippets
+  [Tabular]: https://github.com/godlygeek/tabular
   [vim-expand-region]: https://github.com/terryma/vim-expand-region
   [vim-bookmarks]: https://github.com/mattesgroeger/vim-bookmarks
-  [tabman]: https://github.com/kien/tabman.vim
-  [ConqueTerm]: https://github.com/rosenfeld/conque-term
-  [vim-workspace]: https://github.com/thaerkh/vim-workspace
+  [Tabman]: https://github.com/kien/tabman.vim
+  [YouCompleteMe]: https://github.com/valloric/youcompleteme
+  [conque-term]: https://github.com/rosenfeld/conque-term
+  [vim-session]: https://github.com/thaerkh/vim-workspace
