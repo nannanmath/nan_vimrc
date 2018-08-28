@@ -15,32 +15,35 @@ cd .nan_vimrc
 ```
 
 * Install YouCompleteMe
- Please refer to [YCM Installation][https://github.com/valloric/youcompleteme#installation]
+ 
+Please refer to [YCM Installation][https://github.com/valloric/youcompleteme#installation]
 
 # Usage
 
- * `<leader>` is `,`.
+* `<leader>` is `,`.
 
 ## Features
 
-### Display & Basic Operation
+* Display & Basic Operation
+  * Colorscheme & Status line.
+    
+    [Solarized][] Colorscheme with dark baclgroud.
+    
+    Status line is based on [lightline.vim][] plugin.
+  
+  * Cpp highlight enhanced by [vim-cpp-enhanced-highlight][].
+  * Auto-completion for quotes, parens, brackets.
+  * Incremental searching.
+  * Auto-changing working directory to the project root.
+  * Display the indention levels with thin vertical lines.
+  * Highlight line and column of current cursor.
+  * Limit line length for red color of the 80-th column.
 
- * Colorscheme & Status line.
-   [Solarized][] Colorscheme with dark baclgroud.
-   Status line is based on [lightline.vim][] plugin.
- * Cpp highlight enhanced by [vim-cpp-enhanced-highlight][].
- * Auto-completion for quotes, parens, brackets.
- * Incremental searching.
- * Auto-changing working directory to the project root.
- * Display the indention levels with thin vertical lines.
- * Highlight line and column of current cursor.
- * Limit line length for red color of the 80-th column.
-
-### Resize and Maximize window
+* Resize and Maximize window
 
 This feature is based on [vim-maximizer][] and [obvious-resize][].
 
-| Shortcut             | Function                            |
+| Shortcut             | Action                              |
 | -------------------- | -----------------------             |
 | `<C-Up>`             | Resize window up.                   |
 | `<C-Down>`           | Resize window down.                 |
@@ -48,41 +51,41 @@ This feature is based on [vim-maximizer][] and [obvious-resize][].
 | `<C-Right>`          | Resize window right.                |
 | `<F4>`               | Toggle maximize / restore a window. |
 
-### Directory explore
+* Directory explore
 
 This feature is based on [NERD Tree][] plugin.
 
-| Shortcut             | Function                               |
+| Shortcut             | Action                                 |
 | -------------------- | -----------------------                |
 | `<F2>`               | Toggle NERD Tree                       |
 | `s`                  | Open buffer in horizental split window |
 | `v`                  | Open buffer in vertical split window   |
 
-### Comment function
+* Comment function
 
 This feature is based on [NERD Commenter][] plugin.
 
-| Shortcut             | Function                |
+| Shortcut             | Action                  |
 | -------------------- | ----------------------- |
 | `<leader>c<space>`   | Toggle comment state    |
 
 More details can be found from [NERD Commenter][].
 
-### Find
+* Find
 
 This feature is based on [CtrlP][] and [Ctrlp-funky][].
 
-| Shortcut             | Function                          |
+| Shortcut             | Action                            |
 | -------------------- | -----------------------           |
 | `<leader>p`          | Find file in a porject directory. |
 | `<leader>r`          | Find in MRU files.                |
 | `<leader>b`          | Find in buffers.                  |
 
-### Buffers
+* Buffers
 
 This feature is based on [vim-buffergator][] and [vim-bufkill][].
 
-| Shortcut             | Function                                |
+| Shortcut             | Action                                  |
 | -------------------- | -----------------------                 |
 | `<leader>b`          | Open a window listing all buffers.      |
 | `<C-s>`              | Open buffer in horizental split window. |
@@ -92,30 +95,30 @@ This feature is based on [vim-buffergator][] and [vim-bufkill][].
 
 More details can be found from [vim-bufkill][].
 
-### Undo & Yank
+* Undo & Yank
 
 This feature is based on [UndoTree][] and [YankRing][].
 
-| Shortcut             | Function                      |
+| Shortcut             | Action                        |
 | -------------------- | -----------------------       |
 | `<F6>`               | Show a Yank ring.             |
 | `<F7>`               | Show a Undo tree in a window. |
 
-### Snippets
+* Snippets
 
 This feature is based on [Unltisnips][] and [vim-snippets][].
 
-| Shortcut             | Function                 |
+| Shortcut             | Action                   |
 | -------------------- | -----------------------  |
 | `<Tab>`              | Snippets expand trigger. |
 | `<C-f>`              | Snippets jump forward.   |
 | `<C-b>`              | Snippets jump backward.  |
 
-### Bookmark
+* Bookmark
 
 This feature is based on [vim-bookmarks][].
 
-| Shortcut             | Function                                |
+| Shortcut             | Action                                  |
 | -------------------- | -----------------------                 |
 | `mm`                 | Add / Remove book mark at current line. |
 | `mn`                 | Jump to next bookmark in buffer.        |
@@ -126,7 +129,7 @@ This feature is based on [vim-bookmarks][].
 
 More details can be found from [vim-bookmarks][].
 
-### Aligning
+* Tabularize
 
 This feature is based on [Tabular][].
 
@@ -136,45 +139,45 @@ This feature is based on [Tabular][].
 
 Input the character you want to align and press Enter.
 
-### Resion expand
+* Region expand
 
 This feature is based on [vim-region-expand][].
 
-| Shortcut             | Function                 |
+| Shortcut             | Action                   |
 | -------------------- | -----------------------  |
 | `+`                  | Expand selective region. |
 | `_`                  | Narrow selective region. |
 
-### Tabs
+* Tabs
 
 This feature is based on [Tabman][].
 
-| Shortcut             | Function                                   |
+| Shortcut             | Action                                     |
 | -------------------- | -----------------------                    |
 | `<F3>`               | Toggle Tabman window for listing all tabs. |
 | `<leader>tf`         | Focus on tabman window.                    |
 
-### Completion
+* Completion
 
 This feature is based on [YouCompleteMe][].
 
 
-| Shortcut             | Function                  |
+| Shortcut             | Action                    |
 | -------------------- | -----------------------   |
 | `<C-a>`              | Invoke YCM Completion.    |
 | `<Down>`             | List select completion.   |
 | `Up`                 | List previous completion. |
 | `<leader>j`          | Goto                      |
 
-### Term
+* Term
 
 This feature is based on [conque-term][].
 
-| Shortcut             | Function                |
+| Shortcut             | Action                  |
 | -------------------- | ----------------------- |
 | `<F8>`               | Open a term.            |
 
-### Session
+* Session
 
 This feature is based on [vim-session][].
 
