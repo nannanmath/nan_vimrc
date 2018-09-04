@@ -78,20 +78,18 @@ This feature is based on [CtrlP][] and [Ctrlp-funky][].
 | Shortcut             | Action                            |
 | -------------------- | -----------------------           |
 | `<leader>p`          | Find file in a porject directory. |
-| `<leader>r`          | Find in MRU files.                |
-| `<leader>b`          | Find in buffers.                  |
 
 * Buffers
 
 This feature is based on [vim-buffergator][] and [vim-bufkill][].
 
-| Shortcut             | Action                                  |
-| -------------------- | -----------------------                 |
-| `<leader>b`          | Open a window listing all buffers.      |
-| `<C-s>`              | Open buffer in horizental split window. |
-| `<C-v>`              | Open buffer in vertical split window.   |
-| `<C-t>`              | Open buffer in a new tab.               |
-| `:BD`                | Wipe a file from buffer.                |
+| Shortcut             | Action                                      |
+| -------------------- | -----------------------                     |
+| `<leader>b`          | Toggle for listing all buffers in a window. |
+| `<C-s>`              | Open buffer in horizental split window.     |
+| `<C-v>`              | Open buffer in vertical split window.       |
+| `<C-t>`              | Open buffer in a new tab.                   |
+| `:BD`                | Wipe a file from buffer.                    |
 
 More details can be found from [vim-bufkill][].
 
@@ -157,6 +155,17 @@ This feature is based on [Tabman][].
 | `<F3>`               | Toggle Tabman window for listing all tabs. |
 | `<leader>tf`         | Focus on tabman window.                    |
 
+* Python-IDE
+
+This feature is based on [python-mode][]
+
+| Shortcut             | Action                  |
+| -------------------- | ----------------------- |
+| `<leader>r`          | Run python code.        |
+| `<leader>k`          | Set breakpoint.         |
+
+
+
 * Completion
 
 This feature is based on [YouCompleteMe][].
@@ -210,5 +219,6 @@ This feature is based on [vim-session][].
   [vim-bookmarks]: https://github.com/mattesgroeger/vim-bookmarks
   [Tabman]: https://github.com/kien/tabman.vim
   [YouCompleteMe]: https://github.com/valloric/youcompleteme
+  [python-mode]: https://github.com/python-mode
   [conque-term]: https://github.com/rosenfeld/conque-term
   [vim-session]: https://github.com/thaerkh/vim-workspace

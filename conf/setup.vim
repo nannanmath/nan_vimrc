@@ -37,6 +37,8 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'Yggdroot/indentLine'
 Plugin 'kien/tabman.vim'
 Plugin 'octol/vim-cpp-enhanced-highlight'
+
+Plugin 'klen/python-mode'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'rosenfeld/conque-term'
 Plugin 'xolox/vim-misc'

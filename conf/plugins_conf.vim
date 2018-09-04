@@ -122,8 +122,15 @@ let g:ctrlp_custom_ignore = {
     \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
     \ }
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
-noremap <Leader>r :CtrlPMRUFiles<CR>
-noremap <Leader>b :CtrlPBuffer<CR>
+"noremap <Leader>r :CtrlPMRUFiles<CR>
+" Add a plugin vim-Buffergator
+"noremap <Leader>b :CtrlPBuffer<CR> 
+
+"""""""""""""""""""""""""""""""""
+" Config vim-bufferfator
+"""""""""""""""""""""""""""""""""
+let g:buffergator_suppress_keymaps = 1
+nnoremap <silent> <Leader>b :BuffergatorToggle<CR>
 
 """""""""""""""""""""""""""""""""
 " Config Undotree
@@ -215,6 +222,11 @@ let g:tabman_side='left'
 let g:tabman_specials=0
 let g:tabman_number=0
 
+"""""""""""""""""""""""
+" Config python-mode
+"""""""""""""""""""""""
+"let g:pymode_run_bind = '<leader>r'
+let g:pymode_breakpoint_bind = '<leader>k'
 
 """""""""""""""""""
 " Config YCM
@@ -238,7 +250,7 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
 """""""""""""""""""""""
 " Config ConqueTerm
 """""""""""""""""""""""
-nnoremap <F8> :ConqueTermSplit bash<CR>
+nnoremap <F12> :ConqueTermSplit bash<CR>
 
 """""""""""""""""""""""
 " Config xolox/vim-session
@@ -247,11 +259,12 @@ let g:session_autoload = 'no'
 nnoremap <leader>ss :SaveSession 
 nnoremap <leader>so :OpenSession 
 
-
 """""""""""""""""""""""
 " Config Tabular
 """""""""""""""""""""""
 noremap <C-l> :Tabularize /
+
+
 
 
 
