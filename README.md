@@ -195,7 +195,17 @@ This feature is based on [vim-session][].
 | `<leader>ss`         | :SaveSession            |
 | `<leader>so`         | :OpenSession            |
   
-  
+* Git
+
+This feature is based on [fugitive][]
+
+| Command              | Action                                             |
+| -------------------- | -----------------------                            |
+| `:Gstatus`           | Open window show `git status`.                     |
+| `:Gdiff`             | Compare working copy / index or resolve conflicts. |
+
+More details can be found from [fugitive][].
+ 
   
   [Solarized]: https://github.com/altercation/vim-colors-solarized
   [lightline.vim]: https://github.com/itchyny/lightline.vim
@@ -222,3 +232,4 @@ This feature is based on [vim-session][].
   [python-mode]: https://github.com/python-mode
   [conque-term]: https://github.com/rosenfeld/conque-term
   [vim-session]: https://github.com/thaerkh/vim-workspace
+  [fugitive]: https://github.com/tpope/vim-fugitive

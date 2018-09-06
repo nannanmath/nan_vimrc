@@ -18,7 +18,7 @@ let g:lightline = {
     \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
     \ },
     \ 'component_function': {
-    \   'gitbranch': 'fugitive#head'
+    \   'gitbranch': 'fugitive#statusline'
     \ },
     \ }
 set noshowmode
@@ -267,8 +267,10 @@ nnoremap <leader>so :OpenSession
 """""""""""""""""""""""
 noremap <C-l> :Tabularize /
 
-
-
+"""""""""""""""""""""""
+" Config fugitive
+"""""""""""""""""""""""
+autocmd BufReadPost fugitive://* set bufhidden=delete
 
 
 
