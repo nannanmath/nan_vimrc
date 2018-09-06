@@ -227,6 +227,9 @@ let g:tabman_number=0
 """""""""""""""""""""""
 "let g:pymode_run_bind = '<leader>r'
 let g:pymode_breakpoint_bind = '<leader>k'
+let g:pymode_doc_bind = 'T'
+let g:pymode_rope_completion = 0
+let g:pymode_rope_complete_on_dot = 1
 
 """""""""""""""""""
 " Config YCM

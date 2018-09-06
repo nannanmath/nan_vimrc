@@ -159,11 +159,11 @@ This feature is based on [Tabman][].
 
 This feature is based on [python-mode][]
 
-| Shortcut             | Action                  |
-| -------------------- | ----------------------- |
-| `<leader>r`          | Run python code.        |
-| `<leader>k`          | Set breakpoint.         |
-
+| Shortcut             | Action                     |
+| -------------------- | -----------------------    |
+| `<leader>r`          | Run python code.           |
+| `<leader>k`          | Set breakpoint.            |
+| `T`                  | Show doc for current word. |
 
 
 * Completion
