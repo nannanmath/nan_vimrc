@@ -8,8 +8,6 @@ endif
 syntax enable
 set background=dark
 colorscheme solarized
-"let g:molokai_original=1
-"let g:rehash256=1
 let g:solarized_termcolors=256
 let g:lightline = {
     \ 'colorscheme': 'solarized',
@@ -150,6 +148,12 @@ let g:UltiSnipsJumpForwardTrigger="<C-f>"
 let g:UltiSnipsJumpBackwardTrigger="<C-b>"
 let g:UltiSnipsEditSplit="vertical"
 "let g:UntiSnipsListSnippets="<C-e>"
+
+"""""""""""""""""""""""""""""""""
+" Config vim-snipts
+"""""""""""""""""""""""""""""""""
+let g:ultisnips_python_style="google"
+let g:ultisnips_python_quoting_style="double"
 
 """""""""""""""""""""""""
 " Config vim-bookmarks
