@@ -2,7 +2,10 @@
 
 nan-vim is a private vim configuration which is welcome to be used by others.
 It's designed for remote logins by SSH. 
-This confiuration is tested on [MobaXterm][] based MS-Windows as local host and Ubuntu Server 16.04 as remote host.
+This confiuration is tested on [MobaXterm][] based MS-Windows as local host 
+and Ubuntu Server 16.04 as remote host.
+
+![Vim_screenshot](./screenshot/Vim.png)
 
 # Installation
  
