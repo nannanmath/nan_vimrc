@@ -19,7 +19,7 @@ cd .nan_vimrc
 
 * Install YouCompleteMe
  
-Please refer to [YCM Installation][https://github.com/valloric/youcompleteme#installation]
+Please refer to [YouCompleteMe][]
 
 # Usage
 
